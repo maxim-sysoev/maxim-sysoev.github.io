@@ -28,10 +28,17 @@ class HomeWidgetModel extends WidgetModel<HomeScreen, HomeModel> implements IHom
   void onResize() {
     _screenSize.accept(ScreenUtil.screenSize());
   }
+
+  @override
+  void onStartQuiz() {
+    // TODO(arefimenko): implement onStartQuiz
+  }
 }
 
 abstract class IHomeWidgetModel extends IWidgetModel {
   ListenableState<ScreenSize> get screenSize;
+
+  void onStartQuiz();
 
   void onResize();
 }

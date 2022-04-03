@@ -23,9 +23,9 @@ class HomeScreen extends ElementaryWidget<HomeWidgetModel> {
             listenableState: wm.screenSize,
             builder: (_, size) =>
                 size?.maybeWhen(
-                  orElse: () => const HomeMediumLayout(),
-                  extraSmall: () => const HomeSmallLayout(),
-                  small: () => const HomeSmallLayout(),
+                  orElse: () => HomeMediumLayout(onStartQuiz: wm.onStartQuiz),
+                  extraSmall: () => HomeSmallLayout(onStartQuiz: wm.onStartQuiz),
+                  small: () => HomeSmallLayout(onStartQuiz: wm.onStartQuiz),
                   // medium: () => const Text('medium'),
                   // large: () => const Text('large'),
                   // extraLarge: () => const Text('extraLarge'),
