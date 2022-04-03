@@ -1,6 +1,8 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/ui/screen/home/home_wm.dart';
+import 'package:quiz/ui/screen/home/layouts/medium.dart';
+import 'package:quiz/ui/screen/home/layouts/small.dart';
 import 'package:quiz/ui/util/screen_util.dart';
 
 /// Quiz home screen
@@ -16,19 +18,19 @@ class HomeScreen extends ElementaryWidget<HomeWidgetModel> {
       builder: (_, size) {
         wm.onResize();
         return Scaffold(
-          body: Center(
-            child: StateNotifierBuilder<ScreenSize>(
-              listenableState: wm.screenSize,
-              builder: (_, size) =>
-              size?.when(
-                extraSmall: () => const Text('extraSmall'),
-                small: () => const Text('small'),
-                medium: () => const Text('medium'),
-                large: () => const Text('large'),
-                extraLarge: () => const Text('extraLarge'),
-              ) ??
-                  const SizedBox.shrink(),
-            ),
+          backgroundColor: Colors.white,
+          body: StateNotifierBuilder<ScreenSize>(
+            listenableState: wm.screenSize,
+            builder: (_, size) =>
+                size?.maybeWhen(
+                  orElse: () => const HomeMediumLayout(),
+                  extraSmall: () => const HomeSmallLayout(),
+                  small: () => const HomeSmallLayout(),
+                  // medium: () => const Text('medium'),
+                  // large: () => const Text('large'),
+                  // extraLarge: () => const Text('extraLarge'),
+                ) ??
+                const SizedBox.shrink(),
           ),
         );
       },
