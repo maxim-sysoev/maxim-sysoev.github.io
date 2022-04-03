@@ -6,6 +6,6 @@ import 'package:quiz/api/data/selection/selection_question_entity.dart';
 class SelectionQuestion extends Question<SelectionQuestionEntity, SelectionAnswer> {
   SelectionQuestion(
     String text,
-    SelectionQuestionEntity answerItem,
-  ) : super(text, answerItem);
+    SelectionQuestionEntity questionEntity,
+  ) : super(text, questionEntity);
 }

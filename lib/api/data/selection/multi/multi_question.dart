@@ -6,6 +6,6 @@ import 'package:quiz/api/data/selection/selection_question_entity.dart';
 class MultiQuestion extends Question<SelectionQuestionEntity, MultiSelectionAnswer> {
   MultiQuestion(
     String text,
-    SelectionQuestionEntity answerItem,
-  ) : super(text, answerItem);
+    SelectionQuestionEntity questionEntity,
+  ) : super(text, questionEntity);
 }

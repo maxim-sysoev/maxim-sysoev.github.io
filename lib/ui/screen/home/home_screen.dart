@@ -20,7 +20,7 @@ class HomeScreen extends ElementaryWidget<HomeWidgetModel> {
         return Scaffold(
           backgroundColor: Colors.white,
           body: StateNotifierBuilder<ScreenSize>(
-            listenableState: wm.screenSize,
+            listenableState: wm.screenSizeState,
             builder: (_, size) =>
                 size?.maybeWhen(
                   orElse: () => HomeMediumLayout(onStartQuiz: wm.onStartQuiz),

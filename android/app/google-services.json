@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "130648126568",
+    "project_id": "surf-quiz-7f420",
+    "storage_bucket": "surf-quiz-7f420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:130648126568:android:92a32ad59224b3df8cb7dd",
+        "android_client_info": {
+          "package_name": "ru.surfstudio.quiz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "130648126568-d1b3blrnflgdjo65u2cne5n78gfvbthf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwUOB9R8A89p2gAnpVBuW2kHoq9rq1SC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "130648126568-d1b3blrnflgdjo65u2cne5n78gfvbthf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

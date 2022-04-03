@@ -9,6 +9,6 @@ import 'package:quiz/api/data/input/input_question_entity.dart';
 class InputQuestion extends Question<InputQuestionEntity, InputAnswer> {
   InputQuestion(
     String text,
-    InputQuestionEntity answerItem,
-  ) : super(text, answerItem);
+    InputQuestionEntity questionEntity,
+  ) : super(text, questionEntity);
 }
