@@ -18,8 +18,8 @@ class SurfLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return SvgPicture.asset(
       IconsRes.surf,
-      width: width, // TODO(arefimenko): rm null aware values???
-      height: height, // TODO(arefimenko): rm null aware values???
+      width: width,
+      height: height,
     );
   }
 }
