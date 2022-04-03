@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/ui/screen/home/widgets/start_quiz.dart';
 import 'package:quiz/ui/screen/home/widgets/surf_logo.dart';
 
 /// HomeScreen small layout UI
@@ -12,13 +13,10 @@ class HomeSmallLayout extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(50),
           child: Column(
-            children: [
-              const SurfLogo(height: 200),
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.red,
-              ),
+            children: const [
+              SurfLogo(height: 200),
+              SizedBox(height: 80),
+              StartQuiz(textAlign: TextAlign.center),
             ],
           ),
         ),
