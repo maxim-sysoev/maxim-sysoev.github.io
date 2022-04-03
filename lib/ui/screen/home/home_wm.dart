@@ -30,9 +30,7 @@ class HomeWidgetModel extends WidgetModel<HomeScreen, HomeModel> implements IHom
   }
 
   @override
-  void onStartQuiz() {
-    // TODO(arefimenko): implement onStartQuiz
-  }
+  void onStartQuiz() {}
 }
 
 abstract class IHomeWidgetModel extends IWidgetModel {
