@@ -1,0 +1,22 @@
+name: quiz
+description: Surf Quiz app
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.16.2 <3.0.0"
+
+dependencies:
+  collection: 1.15.0
+  elementary: 1.2.0
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  surf_lint_rules: 1.5.0
+
+flutter:
+  uses-material-design: true
