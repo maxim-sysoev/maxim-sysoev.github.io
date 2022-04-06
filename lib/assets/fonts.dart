@@ -39,15 +39,6 @@ class FontsRes {
     color: ColorRes.black,
   );
 
-  @Deprecated('not used in design')
-  static const TextStyle tabletText2Black = TextStyle(
-    fontFamily: _steinbeck,
-    fontSize: 20,
-    fontWeight: FontWeight.w400,
-    letterSpacing: -.2,
-    color: ColorRes.black,
-  );
-
   static const TextStyle h1Black = TextStyle(
     fontFamily: _steinbeck,
     fontSize: 38,
