@@ -6,21 +6,26 @@ class Arrow extends StatelessWidget {
   final double? width;
   final double? height;
   final Color? color;
+  final bool isRotated;
 
   const Arrow({
     this.width,
     this.height,
     this.color,
+    this.isRotated = false,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(
-      IconsRes.arrow,
-      width: width,
-      height: height,
-      color: color,
+    return RotatedBox(
+      quarterTurns: isRotated ? 2 : 0,
+      child: SvgPicture.asset(
+        IconsRes.arrow,
+        width: width,
+        height: height,
+        color: color,
+      ),
     );
   }
 }

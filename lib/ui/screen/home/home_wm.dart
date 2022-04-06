@@ -2,13 +2,21 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quiz/ui/screen/home/home_model.dart';
 import 'package:quiz/ui/screen/home/home_screen.dart';
+import 'package:quiz/ui/screen/question/question_route.dart';
 
 HomeWidgetModel createHomeWidgetModel(BuildContext context) {
-  return HomeWidgetModel(HomeModel());
+  return HomeWidgetModel(Navigator.of(context));
 }
 
 class HomeWidgetModel extends WidgetModel<HomeScreen, HomeModel> implements IHomeWidgetModel {
-  HomeWidgetModel(HomeModel model) : super(model);
+  final NavigatorState _navigator;
+
+  HomeWidgetModel(this._navigator) : super(HomeModel());
+
+  @override
+  void onStartQuiz() => _navigator.push(QuestionRoute());
 }
 
-abstract class IHomeWidgetModel extends IWidgetModel {}
+abstract class IHomeWidgetModel extends IWidgetModel {
+  void onStartQuiz();
+}

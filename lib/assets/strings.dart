@@ -7,5 +7,11 @@ class StringRes {
   static const String startQuiz = 'Начать';
   static const String back = 'Назад';
 
+  static const String singleSelection = 'Выбери один вариант ответа:';
+  static const String multiSelection = 'Выбери один или несколько вариантов ответа:';
+
+  static const String nextQuestion = 'Далее';
+  static const String skipQuestion = 'или пропустить вопрос';
+
   const StringRes._();
 }
