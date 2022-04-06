@@ -113,5 +113,13 @@ class FontsRes {
     color: ColorRes.black40,
   );
 
+  static const TextStyle text1Black32 = TextStyle(
+    fontFamily: _steinbeck,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    letterSpacing: -.2,
+    color: ColorRes.black32,
+  );
+
   const FontsRes._();
 }

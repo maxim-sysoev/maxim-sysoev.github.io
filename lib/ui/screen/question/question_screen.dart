@@ -17,55 +17,64 @@ class QuestionScreen extends ElementaryWidget<IQuestionWidgetModel> {
 
   @override
   Widget build(IQuestionWidgetModel wm) {
-    return CustomScreen(
-      child: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (notification) {
-          notification.disallowIndicator();
-          return false;
-        },
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SecondaryButton(withArrow: true, text: StringRes.back, onPressed: wm.onBack),
-                  const SizedBox(height: 32),
-                  StateNotifierBuilder<int>(
-                    listenableState: wm.pageState,
-                    builder: (_, currPage) => _PageState(
-                      currentPage: currPage!,
-                      totalPages: wm.totalPages,
+    return WillPopScope(
+      onWillPop: () {
+        wm.onBack();
+        return Future.value(false);
+      },
+      child: GestureDetector(
+        onTap: wm.onScreen,
+        child: CustomScreen(
+          child: NotificationListener<OverscrollIndicatorNotification>(
+            onNotification: (notification) {
+              notification.disallowIndicator();
+              return false;
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SecondaryButton(withArrow: true, text: StringRes.back, onPressed: wm.onBack),
+                      const SizedBox(height: 32),
+                      StateNotifierBuilder<int>(
+                        listenableState: wm.pageState,
+                        builder: (_, currPage) => _PageState(
+                          currentPage: currPage!,
+                          totalPages: wm.totalPages,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: StateNotifierBuilder<List<Question>>(
+                    listenableState: wm.questionsState,
+                    builder: (_, questions) => PageView.builder(
+                      controller: wm.pageController,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (_, i) {
+                        final question = questions![i];
+                        return ListView(
+                          padding: const EdgeInsets.all(16),
+                          children: [
+                            QuestionPage(
+                              question: question,
+                              onNextPressed: wm.nextQuestion,
+                              onSkipPressed: wm.skipQuestion,
+                              onResultUpdated: wm.onResultUpdated,
+                            ),
+                          ],
+                        );
+                      },
                     ),
                   ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: StateNotifierBuilder<List<Question>>(
-                listenableState: wm.questionsState,
-                builder: (_, questions) => PageView.builder(
-                  controller: wm.pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (_, i) {
-                    final question = questions![i];
-                    return ListView(
-                      padding: const EdgeInsets.all(16),
-                      children: [
-                        QuestionPage(
-                          question: question,
-                          onNextPressed: wm.nextQuestion,
-                          onSkipPressed: wm.skipQuestion,
-                          onItemPressed: wm.onResultUpdated,
-                        ),
-                      ],
-                    );
-                  },
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

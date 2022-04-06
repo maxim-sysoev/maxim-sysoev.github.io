@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/api/data/input_question.dart';
 import 'package:quiz/api/data/question.dart';
 import 'package:quiz/api/data/selection_question.dart';
 import 'package:quiz/assets/assets.dart';
@@ -11,13 +12,13 @@ class QuestionPage extends StatefulWidget {
   final Question question;
   final VoidCallback onNextPressed;
   final VoidCallback onSkipPressed;
-  final ValueChanged<List<SelectionItem>?> onItemPressed;
+  final ValueChanged<Object?> onResultUpdated;
 
   const QuestionPage({
     required this.question,
     required this.onNextPressed,
     required this.onSkipPressed,
-    required this.onItemPressed,
+    required this.onResultUpdated,
     Key? key,
   }) : super(key: key);
 
@@ -50,8 +51,16 @@ class _QuestionPageState extends State<QuestionPage> {
           _SelectionQuestionSection(
             selectionQuestion: question,
             onItemPressed: (items) {
-              widget.onItemPressed(items);
+              widget.onResultUpdated(items);
               handleUpdate(items);
+            },
+          ),
+        if (question is InputQuestion)
+          _InputQuestionSection(
+            inputQuestion: question,
+            onInputUpdated: (str) {
+              widget.onResultUpdated(str);
+              handleUpdate(str);
             },
           ),
         const SizedBox(height: 32),
@@ -78,6 +87,36 @@ class _QuestionPageState extends State<QuestionPage> {
   void handleUpdate(Object? data) {
     containsResult = widget.question.result != null || data != null;
     setState(() {});
+  }
+}
+
+class _InputQuestionSection extends StatelessWidget {
+  final InputQuestion inputQuestion;
+  final ValueChanged<String?> onInputUpdated;
+
+  const _InputQuestionSection({
+    required this.inputQuestion,
+    required this.onInputUpdated,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onChanged: (str) => onInputUpdated(str.isEmpty ? null : str),
+      style: FontsRes.text1Black,
+      initialValue: inputQuestion.result,
+      cursorColor: ColorRes.black,
+      cursorWidth: 1,
+      maxLines: 3,
+      decoration: InputDecoration(
+        hintText: inputQuestion.hint,
+        hintStyle: FontsRes.text1Black32,
+        hintMaxLines: 3,
+        border: const UnderlineInputBorder(borderSide: BorderSide(color: ColorRes.black32)),
+        focusedBorder: const UnderlineInputBorder(),
+      ),
+    );
   }
 }
 
