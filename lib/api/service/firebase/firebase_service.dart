@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz/api/data/question.dart';
 import 'package:quiz/api/service/firebase/response/question_mapper.dart';
@@ -16,4 +14,7 @@ class FirebaseService {
   Future<Iterable<Question>> getQuestions() async {
     return _questionsCollection.get().then((value) => value.docs).then(QuestionMapper.transform);
   }
+
+  /// сохранить результат квиза
+  Future<void> saveQuizResult(Map<String, Object?> data) => _resultsCollection.add(data);
 }

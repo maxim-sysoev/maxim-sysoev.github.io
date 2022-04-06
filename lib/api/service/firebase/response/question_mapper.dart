@@ -12,6 +12,7 @@ const _multi = 'multi';
 const _questions = 'questions';
 const _isCorrect = 'is_correct';
 const _canSkip = 'can_skip';
+const _isPersonal = 'is_personal';
 
 class QuestionMapper {
   static Iterable<Question> transform(List<QueryDocumentSnapshot<Map<String, dynamic>>> data) {
@@ -46,6 +47,7 @@ class QuestionMapper {
             text: text,
             hint: docData[_hint] as String? ?? '',
             canSkip: canSkip,
+            isPersonalInfo: docData[_isPersonal] as bool? ?? false,
           );
         default:
           return null;

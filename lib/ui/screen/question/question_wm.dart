@@ -2,6 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/api/data/question.dart';
 import 'package:quiz/ui/screen/question/question_model.dart';
+import 'package:quiz/ui/screen/question/question_screen.dart';
 import 'package:quiz/ui/screen/result/result_route.dart';
 
 const _kChangePageDuration = Duration(milliseconds: 400);
@@ -19,7 +20,8 @@ QuestionWidgetModel createQuestionWidgetModel({
   );
 }
 
-class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
+class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
+    implements IQuestionWidgetModel {
   late final NavigatorState _navigator;
   late final StateNotifier<int> _pageState = StateNotifier<int>(initValue: 1);
 
@@ -53,7 +55,7 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   void nextQuestion() {
     final isStepPerformed = _changedNextPage();
     if (isStepPerformed) return;
-    // TODO(arefimenko): save quiz result
+    model.saveResult(_questionsState.value!);
     Future.delayed(const Duration(milliseconds: 50), () => _navigator.push(ResultRoute()));
   }
 
