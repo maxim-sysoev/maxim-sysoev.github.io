@@ -64,7 +64,17 @@ class _QuestionPageState extends State<QuestionPage> {
             },
           ),
         const SizedBox(height: 32),
-        PrimaryButton(text: StringRes.nextQuestion, onPressed: widget.onNextPressed),
+        AnimatedCrossFade(
+          firstChild: PrimaryButton(text: StringRes.nextQuestion, onPressed: widget.onNextPressed),
+          secondChild: IgnorePointer(
+            child: Opacity(
+              opacity: .4,
+              child: PrimaryButton(text: StringRes.nextQuestion, onPressed: () {}),
+            ),
+          ),
+          crossFadeState: containsResult ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          duration: kThemeChangeDuration,
+        ),
         AnimatedCrossFade(
           firstChild: Opacity(
             opacity: 0,
@@ -77,7 +87,9 @@ class _QuestionPageState extends State<QuestionPage> {
             padding: const EdgeInsets.only(top: 24),
             child: SecondaryButton(text: StringRes.skipQuestion, onPressed: widget.onSkipPressed),
           ),
-          crossFadeState: containsResult ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          crossFadeState: containsResult || !question.canSkip
+              ? CrossFadeState.showFirst
+              : CrossFadeState.showSecond,
           duration: kThemeChangeDuration,
         ),
       ],

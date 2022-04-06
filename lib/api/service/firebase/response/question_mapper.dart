@@ -11,6 +11,7 @@ const _single = 'single';
 const _multi = 'multi';
 const _questions = 'questions';
 const _isCorrect = 'is_correct';
+const _canSkip = 'can_skip';
 
 class QuestionMapper {
   static Iterable<Question> transform(List<QueryDocumentSnapshot<Map<String, dynamic>>> data) {
@@ -19,6 +20,7 @@ class QuestionMapper {
       final docData = doc.data();
       final questionType = docData[_type] as String;
       final text = docData[_text] as String;
+      final canSkip = docData[_canSkip] as bool? ?? true;
       switch (questionType) {
         case _single:
         case _multi:
@@ -36,12 +38,14 @@ class QuestionMapper {
             text: text,
             questions: questions,
             selectionType: selectionType,
+            canSkip: canSkip,
           );
         case _input:
           return InputQuestion(
             id: id,
             text: text,
-            hint: docData[_hint] as String?,
+            hint: docData[_hint] as String? ?? '',
+            canSkip: canSkip,
           );
         default:
           return null;

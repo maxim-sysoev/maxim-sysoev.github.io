@@ -9,11 +9,14 @@ const _kChangePageCurve = Curves.easeInOutQuad;
 QuestionWidgetModel createQuestionWidgetModel({
   required Iterable<Question> questions,
   required BuildContext context,
-}) =>
-    QuestionWidgetModel(
-      questions: questions,
-      navigator: Navigator.of(context),
-    );
+}) {
+  final questionsList = questions.toList()..shuffle();
+  final lastQuestions = questionsList.where((e) => !e.canSkip);
+  return QuestionWidgetModel(
+    questions: [...questionsList.where((e) => e.canSkip), ...lastQuestions],
+    navigator: Navigator.of(context),
+  );
+}
 
 class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   late final NavigatorState _navigator;
@@ -38,11 +41,11 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   int get totalPages => _totalPages;
 
   QuestionWidgetModel({
-    required Iterable<Question> questions,
+    required List<Question> questions,
     required NavigatorState navigator,
   })  : _totalPages = questions.length,
         _navigator = navigator,
-        _questionsState = StateNotifier<List<Question>>(initValue: questions.toList()..shuffle()),
+        _questionsState = StateNotifier<List<Question>>(initValue: questions),
         super(QuestionModel());
 
   @override
