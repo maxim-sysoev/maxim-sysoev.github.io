@@ -148,6 +148,7 @@ class _SelectionQuestionSection extends StatefulWidget {
 
 class _SelectionQuestionSectionState extends State<_SelectionQuestionSection> {
   late final bool isMultiple;
+  late final List<SelectionItem> questions;
 
   final _selectedValues = <SelectionItem>[];
 
@@ -155,6 +156,7 @@ class _SelectionQuestionSectionState extends State<_SelectionQuestionSection> {
   void initState() {
     super.initState();
     final question = widget.selectionQuestion;
+    questions = question.questions.toList()..shuffle();
     isMultiple = question.selectionType == SelectionType.multi;
     final res = question.result;
     if (res != null) _selectedValues.addAll(res);
@@ -163,7 +165,7 @@ class _SelectionQuestionSectionState extends State<_SelectionQuestionSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: widget.selectionQuestion.questions
+      children: questions
           .map<Widget>(
             (e) => SelectionCard(
               text: e.text,
