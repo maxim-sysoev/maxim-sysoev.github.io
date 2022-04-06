@@ -27,6 +27,7 @@ class FirebaseConfig {
   static FirebaseOptions get config {
     if (kIsWeb) return web;
     if (Platform.isAndroid) return android;
+    if (Platform.isIOS) return android; // TODO(arefimenko): impl macos project
     throw UnimplementedError();
   }
 }
