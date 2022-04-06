@@ -1,5 +1,6 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart' hide BackButton;
+import 'package:quiz/api/data/question.dart';
 import 'package:quiz/assets/assets.dart';
 import 'package:quiz/ui/screen/question/question_page.dart';
 import 'package:quiz/ui/screen/question/question_wm.dart';
@@ -7,7 +8,11 @@ import 'package:quiz/ui/widgets/custom_screen.dart';
 import 'package:quiz/ui/widgets/secondary_button.dart';
 
 class QuestionScreen extends ElementaryWidget<IQuestionWidgetModel> {
-  const QuestionScreen({Key? key}) : super(createQuestionWidgetModel, key: key);
+  QuestionScreen(Iterable<Question> questions, {Key? key})
+      : super(
+          (ctx) => createQuestionWidgetModel(questions: questions, context: ctx),
+          key: key,
+        );
 
   @override
   Widget build(IQuestionWidgetModel wm) {

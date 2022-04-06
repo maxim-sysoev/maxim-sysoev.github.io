@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz/api/data/question.dart';
 import 'package:quiz/ui/screen/question/question_screen.dart';
 
 class QuestionRoute extends MaterialPageRoute<void> {
-  QuestionRoute() : super(builder: (_) => const QuestionScreen());
+  QuestionRoute(Iterable<Question> questions) : super(builder: (_) => QuestionScreen(questions));
 
   @override
   Widget buildTransitions(
