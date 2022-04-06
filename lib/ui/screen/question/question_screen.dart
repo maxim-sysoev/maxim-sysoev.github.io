@@ -57,7 +57,7 @@ class QuestionScreen extends ElementaryWidget<IQuestionWidgetModel> {
                           question: question,
                           onNextPressed: wm.nextQuestion,
                           onSkipPressed: wm.skipQuestion,
-                          onItemPressed: wm.onSelectionItem,
+                          onItemPressed: wm.onResultUpdated,
                         ),
                       ],
                     );

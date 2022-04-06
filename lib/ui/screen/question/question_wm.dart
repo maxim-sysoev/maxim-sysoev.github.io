@@ -49,12 +49,12 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   @override
   void nextQuestion() {
     // TODO(arefimenko): save answer result
-    final isQuizFinished = _changedNextPage();
+    final isStepPerformed = _changedNextPage();
   }
 
   @override
   void skipQuestion() {
-    final isQuizFinished = _changedNextPage();
+    final isStepPerformed = _changedNextPage();
   }
 
   @override
@@ -69,8 +69,8 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   }
 
   @override
-  void onSelectionItem(List<SelectionItem>? items) {
-    _questionsState.value![_pageController.page!.toInt()].result = items;
+  void onResultUpdated(Object? result) {
+    _questionsState.value![_pageController.page!.toInt()].result = result;
   }
 
   bool _changedNextPage() {
@@ -92,7 +92,7 @@ abstract class IQuestionWidgetModel extends IWidgetModel {
 
   int get totalPages;
 
-  void onSelectionItem(List<SelectionItem>? items);
+  void onResultUpdated(Object? result);
 
   void nextQuestion();
 
