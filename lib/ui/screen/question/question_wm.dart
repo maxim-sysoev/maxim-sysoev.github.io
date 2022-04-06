@@ -2,6 +2,7 @@ import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/api/data/question.dart';
 import 'package:quiz/ui/screen/question/question_model.dart';
+import 'package:quiz/ui/screen/result/result_route.dart';
 
 const _kChangePageDuration = Duration(milliseconds: 400);
 const _kChangePageCurve = Curves.easeInOutQuad;
@@ -50,25 +51,27 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
 
   @override
   void nextQuestion() {
-    // TODO(arefimenko): save answer result
     final isStepPerformed = _changedNextPage();
+    if (isStepPerformed) return;
+    // TODO(arefimenko): save quiz result
+    Future.delayed(const Duration(milliseconds: 50), () => _navigator.push(ResultRoute()));
   }
 
   @override
   void skipQuestion() {
-    final isStepPerformed = _changedNextPage();
+    _changedNextPage();
   }
 
   @override
   void onBack() {
     final currPage = _pageState.value!;
+    FocusManager.instance.primaryFocus?.unfocus();
     if (currPage == 1) {
       _navigator.pop();
       return;
     }
     _pageState.accept(currPage - 1);
     _pageController.previousPage(duration: _kChangePageDuration, curve: _kChangePageCurve);
-    FocusManager.instance.primaryFocus?.unfocus();
   }
 
   @override
@@ -84,10 +87,10 @@ class QuestionWidgetModel extends WidgetModel implements IQuestionWidgetModel {
   bool _changedNextPage() {
     final questions = _questionsState.value!;
     final currPage = _pageState.value!;
+    FocusManager.instance.primaryFocus?.unfocus();
     if (currPage > questions.length - 1) return false;
     _pageState.accept(currPage + 1);
     _pageController.nextPage(duration: _kChangePageDuration, curve: _kChangePageCurve);
-    FocusManager.instance.primaryFocus?.unfocus();
     return true;
   }
 }

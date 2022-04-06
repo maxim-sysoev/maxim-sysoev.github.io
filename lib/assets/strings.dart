@@ -13,6 +13,12 @@ class StringRes {
   static const String nextQuestion = 'Далее';
   static const String skipQuestion = 'или пропустить вопрос';
 
+  static const String resultHeader1 = 'Ты ';
+  static const String resultHeader2 = 'потрясающий!';
+  static const String resultDescription =
+      'Обязательно посети наши станции, посвящённые QA, Аналитике, Android и iOS разработке.';
+  static const String resultAction = 'На главную';
+
   const StringRes._();
 
   static String quizTotalState(int total) => ' из $total вопросов';
