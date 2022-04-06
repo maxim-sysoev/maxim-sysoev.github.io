@@ -41,8 +41,8 @@ class _SelectionCardState extends State<SelectionCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onPressed();
         setState(() => _isSelected = !_isSelected);
+        widget.onPressed();
       },
       child: Row(
         children: [

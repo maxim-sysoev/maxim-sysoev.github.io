@@ -15,6 +15,5 @@ class StringRes {
 
   const StringRes._();
 
-  static String quizPageState({required int current, required int total}) =>
-      '$current из $total вопросов';
+  static String quizTotalState(int total) => ' из $total вопросов';
 }
