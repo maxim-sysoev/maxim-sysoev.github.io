@@ -23,7 +23,12 @@ class QuestionPage extends StatelessWidget {
           style: FontsRes.text1Black,
         ),
         const SizedBox(height: 32),
-        ...['rmkwksmd', 'asdanj asmda', 'asdjna knjsda', 'askdmaskd']
+        ...[
+          'rmkwksmd',
+          'asdanj asmd asdnjka isnakjsndkasb dasb dhabslbnoiuboiyboibuu vbaosbdasbdaiosbd ahbsd oauhbsduahsb duha sbdoausbd aousbdauhh bsdaousbda usbda ubsa',
+          'asdjna knjsda',
+          'askdmaskd',
+        ]
             .map<Widget>((e) => SelectionCard(text: e, onPressed: () {}))
             .separated(const SizedBox(height: 8)),
         const SizedBox(height: 32),

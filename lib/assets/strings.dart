@@ -14,4 +14,7 @@ class StringRes {
   static const String skipQuestion = 'или пропустить вопрос';
 
   const StringRes._();
+
+  static String quizPageState({required int current, required int total}) =>
+      '$current из $total вопросов';
 }

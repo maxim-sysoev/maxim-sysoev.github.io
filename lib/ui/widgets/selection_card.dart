@@ -53,7 +53,7 @@ class _SelectionCardState extends State<SelectionCard> {
             duration: kThemeChangeDuration,
           ),
           const SizedBox(width: 16),
-          Text(widget.text, style: FontsRes.text1Black),
+          Expanded(child: Text(widget.text, style: FontsRes.text1Black)),
         ],
       ),
     );

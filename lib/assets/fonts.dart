@@ -50,7 +50,7 @@ class FontsRes {
 
   static const TextStyle h1Black = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 36,
+    fontSize: 38,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black,
@@ -58,7 +58,7 @@ class FontsRes {
 
   static const TextStyle h2Black = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black,
@@ -66,7 +66,7 @@ class FontsRes {
 
   static const TextStyle h1BlueItalic = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 36,
+    fontSize: 38,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     fontStyle: FontStyle.italic,
@@ -75,7 +75,7 @@ class FontsRes {
 
   static const TextStyle buttonBlack = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black,
@@ -83,7 +83,7 @@ class FontsRes {
 
   static const TextStyle buttonBlack60 = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black60,
@@ -99,7 +99,7 @@ class FontsRes {
 
   static const TextStyle text1Black = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black,
@@ -107,7 +107,7 @@ class FontsRes {
 
   static const TextStyle text1Black40 = TextStyle(
     fontFamily: _steinbeck,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     letterSpacing: -.2,
     color: ColorRes.black40,

@@ -12,19 +12,25 @@ class QuestionScreen extends ElementaryWidget<IQuestionWidgetModel> {
   @override
   Widget build(IQuestionWidgetModel wm) {
     return CustomScreen(
-      child: ListView(
-        padding: const EdgeInsets.all(16),
-        children: [
-          SecondaryButton(
-            withArrow: true,
-            text: StringRes.back,
-            onPressed: () {},
-          ),
-          const SizedBox(height: 32),
-          const Text('1 из 5 вопросов', style: FontsRes.text1Black40),
-          const SizedBox(height: 16),
-          QuestionPage(),
-        ],
+      child: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (notification) {
+          notification.disallowIndicator();
+          return false;
+        },
+        child: ListView(
+          padding: const EdgeInsets.all(16),
+          children: [
+            SecondaryButton(
+              withArrow: true,
+              text: StringRes.back,
+              onPressed: () {},
+            ),
+            const SizedBox(height: 32),
+            Text(StringRes.quizPageState(current: 1, total: 10), style: FontsRes.text1Black40),
+            const SizedBox(height: 16),
+            QuestionPage(),
+          ],
+        ),
       ),
     );
   }
