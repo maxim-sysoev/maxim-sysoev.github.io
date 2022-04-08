@@ -6,6 +6,8 @@ const _steinbeck = 'steinbeck';
 class FontsRes {
   static const TextStyle steinbeck = TextStyle(fontFamily: _steinbeck);
 
+  // tablet
+
   static const TextStyle tabletH1Black = TextStyle(
     fontFamily: _steinbeck,
     fontSize: 80,
@@ -38,6 +40,8 @@ class FontsRes {
     letterSpacing: -.2,
     color: ColorRes.black,
   );
+
+  // mobile
 
   static const TextStyle h1Black = TextStyle(
     fontFamily: _steinbeck,
