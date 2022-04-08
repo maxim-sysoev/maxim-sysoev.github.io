@@ -25,7 +25,9 @@ class _PrimaryButtonState extends State<PrimaryButton> {
       onTap: widget.onPressed,
       onHighlightChanged: (state) => setState(() => _isPressed = state),
       highlightColor: Colors.black,
+      hoverColor: Colors.black,
       splashColor: Colors.transparent,
+      onHover: (state) => setState(() => _isPressed = state),
       child: DecoratedBox(
         decoration: BoxDecoration(border: Border.all()),
         child: FittedBox(

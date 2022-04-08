@@ -27,7 +27,9 @@ class _SecondaryButtonState extends State<SecondaryButton> {
       onTap: widget.onPressed,
       onHighlightChanged: (state) => setState(() => _isPressed = state),
       highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
       splashColor: Colors.transparent,
+      onHover: (state) => setState(() => _isPressed = state),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: Row(

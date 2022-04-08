@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:quiz/ui/widgets/background_painter.dart';
 
 class CustomScreen extends StatelessWidget {
   final Widget child;
@@ -9,15 +8,11 @@ class CustomScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
-          child: Stack(
-            children: [
-              Positioned.fill(child: CustomPaint(painter: BackgroundPainter())),
-              child,
-            ],
-          ),
+          child: child,
         ),
       ),
     );
