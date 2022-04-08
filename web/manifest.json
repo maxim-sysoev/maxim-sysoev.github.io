@@ -1,11 +1,11 @@
 {
-    "name": "quiz",
-    "short_name": "quiz",
+    "name": "Surf Quiz",
+    "short_name": "Surf Quiz",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Surf quiz app",
+    "description": "Surf Quiz app",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
