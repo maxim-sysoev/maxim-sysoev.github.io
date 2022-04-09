@@ -20,22 +20,17 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (_, size) {
-        ScreenSizeHolder.update();
-        return WidgetsApp(
-          color: Colors.transparent,
-          builder: (_, widget) => Stack(
-            children: [
-              Positioned.fill(child: CustomPaint(painter: BackgroundPainter())),
-              const MaterialApp(
-                color: Colors.transparent,
-                home: HomeScreen(),
-              ),
-            ],
+    return WidgetsApp(
+      color: Colors.transparent,
+      builder: (_, widget) => Stack(
+        children: [
+          Positioned.fill(child: CustomPaint(painter: BackgroundPainter())),
+          const MaterialApp(
+            color: Colors.transparent,
+            home: HomeScreen(),
           ),
-        );
-      },
+        ],
+      ),
     );
   }
 }
