@@ -21,8 +21,9 @@ class HomeModel extends ElementaryModel {
     if (completer != null) return completer.future;
     _completer = Completer<Iterable<Question>>();
     return _firebaseService.getQuestions().then((value) {
-      _completer!.complete(value);
-      return value;
+      final visibleQuestions = value.where((element) => !element.hide);
+      _completer!.complete(visibleQuestions);
+      return visibleQuestions;
     });
   }
 

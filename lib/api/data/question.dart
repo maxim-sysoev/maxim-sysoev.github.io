@@ -2,6 +2,7 @@ abstract class Question<T> {
   final String id;
   final String text;
   final bool canSkip;
+  final bool hide;
   T? result;
 
   Question({
@@ -9,5 +10,7 @@ abstract class Question<T> {
     required this.text,
     this.result,
     bool? canSkip,
-  }) : canSkip = canSkip ?? false;
+    bool? hide,
+  })  : canSkip = canSkip ?? false,
+        hide = hide ?? false;
 }

@@ -33,7 +33,8 @@ class SelectionQuestion extends Question<List<SelectionItem>> {
     required this.questions,
     required this.selectionType,
     bool? canSkip,
-  }) : super(id: id, text: text, canSkip: canSkip);
+    bool? hide,
+  }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
 }
 
 extension SelectionTypeX on SelectionType {

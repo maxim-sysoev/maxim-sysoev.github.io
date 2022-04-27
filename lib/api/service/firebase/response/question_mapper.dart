@@ -12,6 +12,7 @@ const _multi = 'multi';
 const _questions = 'questions';
 const _isCorrect = 'is_correct';
 const _canSkip = 'can_skip';
+const _hide = 'hide';
 const _isPersonal = 'is_personal';
 
 class QuestionMapper {
@@ -22,6 +23,7 @@ class QuestionMapper {
       final questionType = docData[_type] as String;
       final text = docData[_text] as String;
       final canSkip = docData[_canSkip] as bool? ?? true;
+      final hide = docData[_hide] as bool? ?? false;
       switch (questionType) {
         case _single:
         case _multi:
@@ -40,6 +42,7 @@ class QuestionMapper {
             questions: questions,
             selectionType: selectionType,
             canSkip: canSkip,
+            hide: hide,
           );
         case _input:
           return InputQuestion(
@@ -48,6 +51,7 @@ class QuestionMapper {
             hint: docData[_hint] as String? ?? '',
             canSkip: canSkip,
             isPersonalInfo: docData[_isPersonal] as bool? ?? false,
+            hide: hide,
           );
         default:
           return null;

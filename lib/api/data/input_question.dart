@@ -11,5 +11,6 @@ class InputQuestion extends Question<String> {
     required this.hint,
     required this.isPersonalInfo,
     bool? canSkip,
-  }) : super(id: id, text: text, canSkip: canSkip);
+    bool? hide,
+  }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
 }
