@@ -46,4 +46,17 @@ class QuestionModel extends ElementaryModel {
     result[_questions] = questionsResult;
     _firebaseService.saveQuizResult(result);
   }
+
+  /// Проверяет все ли ответы верные
+  ///
+  /// Если у ответа нет правильного ответа (например, поле ввода), то он считается правильным
+  bool isAllAnswersCorrect(List<Question> questions) {
+    return questions.every((element) {
+      if (element is SelectionQuestion) {
+        return element.result?.every((element) => element.isCorrect) ?? false;
+      }
+
+      return true;
+    });
+  }
 }

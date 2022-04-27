@@ -1,8 +1,12 @@
 import 'dart:async';
 
 import 'package:elementary/elementary.dart';
+import 'package:quiz/api/data/input_question.dart';
 import 'package:quiz/api/data/question.dart';
 import 'package:quiz/api/service/firebase/firebase_service.dart';
+
+/// Количество вопросов для квиза
+const questionsCount = 6;
 
 class HomeModel extends ElementaryModel {
   final FirebaseService _firebaseService;
@@ -20,5 +24,29 @@ class HomeModel extends ElementaryModel {
       _completer!.complete(value);
       return value;
     });
+  }
+
+  /// Выбирается [questionsCount] вопросов
+  ///
+  /// Если вопросы ещё не загружены возвращает null
+  /// Вопросы со сбором перс данных обязательно включаются в список, остальные выбираются рандомно
+  Future<List<Question>?> selectQuestions() async {
+    if (!(_completer?.isCompleted ?? false)) return null;
+    final questions = await _completer!.future;
+
+    final personalDataQuestions = <Question>[];
+    final otherQuestions = <Question>[];
+    for (final item in questions) {
+      if (item is InputQuestion && item.isPersonalInfo) {
+        personalDataQuestions.add(item);
+      } else {
+        otherQuestions.add(item);
+      }
+    }
+
+    final randomQuestions =
+        (otherQuestions..shuffle()).take(questionsCount - personalDataQuestions.length);
+
+    return [...randomQuestions, ...personalDataQuestions];
   }
 }
