@@ -1,6 +1,7 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/assets/assets.dart';
+import 'package:quiz/ui/screen/home/home_model.dart';
 import 'package:quiz/ui/screen/home/home_wm.dart';
 import 'package:quiz/ui/widgets/custom_screen.dart';
 import 'package:quiz/ui/widgets/primary_button.dart';
@@ -30,7 +31,10 @@ class HomeScreen extends ElementaryWidget<IHomeWidgetModel> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(StringRes.quizDescription, style: FontsRes.text1Black),
+            Text(
+              StringRes.quizDescription(questionsCount),
+              style: FontsRes.text1Black,
+            ),
             const SizedBox(height: 32),
             PrimaryButton(text: StringRes.startQuiz, onPressed: wm.onStartQuiz),
             const Spacer(),

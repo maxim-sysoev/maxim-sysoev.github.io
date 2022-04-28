@@ -56,7 +56,15 @@ class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
     final isStepPerformed = _changedNextPage();
     if (isStepPerformed) return;
     model.saveResult(_questionsState.value!);
-    Future.delayed(const Duration(milliseconds: 50), () => _navigator.push(ResultRoute()));
+    final isAllCorrect = model.isAllAnswersCorrect(_questionsState.value!);
+    Future.delayed(
+      const Duration(milliseconds: 50),
+      () => _navigator.push(
+        ResultRoute(
+          isSuccess: isAllCorrect,
+        ),
+      ),
+    );
   }
 
   @override

@@ -6,7 +6,12 @@ import 'package:quiz/ui/widgets/primary_button.dart';
 import 'package:quiz/ui/widgets/surf_logo.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({Key? key}) : super(key: key);
+  final bool isSuccess;
+
+  const ResultScreen({
+    required this.isSuccess,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,17 +23,20 @@ class ResultScreen extends StatelessWidget {
           children: [
             const SurfLogo(width: 60),
             const Spacer(),
-            RichText(
-              text: const TextSpan(
-                style: FontsRes.h1Black,
-                children: [
-                  TextSpan(text: StringRes.resultHeader1),
-                  TextSpan(text: StringRes.resultHeader2, style: FontsRes.h1BlueItalic),
-                ],
+            if (isSuccess)
+              const _ResultDescriptionBlock(
+                header1: StringRes.successResultHeader1,
+                header2: StringRes.successResultHeader2,
+                header3: StringRes.successResultHeader3,
+                description: StringRes.successResultDescription,
+              )
+            else
+              const _ResultDescriptionBlock(
+                header1: StringRes.failureResultHeader1,
+                header2: StringRes.failureResultHeader2,
+                header3: StringRes.failureResultHeader3,
+                description: StringRes.failureResultDescription,
               ),
-            ),
-            const SizedBox(height: 24),
-            const Text(StringRes.resultDescription, style: FontsRes.text1Black),
             const SizedBox(height: 32),
             PrimaryButton(
               text: StringRes.resultAction,
@@ -41,6 +49,42 @@ class ResultScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ResultDescriptionBlock extends StatelessWidget {
+  final String header1;
+  final String header2;
+  final String header3;
+  final String description;
+
+  const _ResultDescriptionBlock({
+    required this.header1,
+    required this.header2,
+    required this.header3,
+    required this.description,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            style: FontsRes.h1Black,
+            children: [
+              TextSpan(text: header1),
+              TextSpan(text: header2, style: FontsRes.h1BlueItalic),
+              TextSpan(text: header3),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        Text(description, style: FontsRes.text1Black),
+      ],
     );
   }
 }

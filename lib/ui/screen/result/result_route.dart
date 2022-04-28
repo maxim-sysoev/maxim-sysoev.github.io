@@ -2,7 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:quiz/ui/screen/result/result_screen.dart';
 
 class ResultRoute extends MaterialPageRoute<void> {
-  ResultRoute() : super(builder: (_) => const ResultScreen());
+  ResultRoute({
+    required bool isSuccess,
+  }) : super(
+          builder: (_) => ResultScreen(
+            isSuccess: isSuccess,
+          ),
+        );
 
   @override
   Widget buildTransitions(
