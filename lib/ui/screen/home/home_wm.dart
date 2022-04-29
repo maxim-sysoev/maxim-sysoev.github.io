@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:elementary/elementary.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:quiz/ui/screen/admin/admin_route.dart';
 import 'package:quiz/ui/screen/home/home_model.dart';
 import 'package:quiz/ui/screen/home/home_screen.dart';
 import 'package:quiz/ui/screen/question/question_route.dart';
@@ -27,8 +29,16 @@ class HomeWidgetModel extends WidgetModel<HomeScreen, HomeModel> implements IHom
     if (questions == null) return;
     unawaited(_navigator.push(QuestionRoute(questions)));
   }
+
+  @override
+  void openAdminPanel() {
+    if (!kDebugMode) return;
+    _navigator.push(AdminRoute());
+  }
 }
 
 abstract class IHomeWidgetModel extends IWidgetModel {
   void onStartQuiz();
+
+  void openAdminPanel();
 }

@@ -1,5 +1,5 @@
 abstract class Question<T> {
-  final String id;
+  final String? id;
   final String text;
   final bool canSkip;
   final bool hide;
