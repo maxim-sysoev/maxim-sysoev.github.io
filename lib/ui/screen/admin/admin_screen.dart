@@ -1,8 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/api/data/question.dart';
+import 'package:quiz/assets/strings.dart';
 import 'package:quiz/ui/screen/admin/admin_wm.dart';
 import 'package:quiz/ui/widgets/custom_screen.dart';
+import 'package:quiz/ui/widgets/secondary_button.dart';
 
 class AdminScreen extends ElementaryWidget<IAdminWidgetModel> {
   const AdminScreen({Key? key}) : super(createAdminWidgetModel, key: key);
@@ -10,31 +12,38 @@ class AdminScreen extends ElementaryWidget<IAdminWidgetModel> {
   @override
   Widget build(IAdminWidgetModel wm) {
     return CustomScreen(
-      child: EntityStateNotifierBuilder<List<Question>>(
-        listenableEntityState: wm.questionsState,
-        builder: (_, state) {
-          if (state == null) return const SizedBox.shrink();
+      child: Column(
+        children: [
+          SecondaryButton(withArrow: true, text: StringRes.back, onPressed: wm.onBack),
+          Expanded(
+            child: EntityStateNotifierBuilder<List<Question>>(
+              listenableEntityState: wm.questionsState,
+              builder: (_, state) {
+                if (state == null) return const SizedBox.shrink();
 
-          return ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: state.length + 1,
-            itemBuilder: (context, index) {
-              if (index == state.length) {
-                return ElevatedButton(
-                  onPressed: wm.createNewQuestion,
-                  child: const Text('Создать вопрос'),
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  itemCount: state.length + 1,
+                  itemBuilder: (context, index) {
+                    if (index == state.length) {
+                      return ElevatedButton(
+                        onPressed: wm.createNewQuestion,
+                        child: const Text('Создать вопрос'),
+                      );
+                    }
+                    final question = state[index];
+
+                    return _QuestionWidget(
+                      question: question,
+                      deleteQuestion: () => wm.deleteQuestion(question),
+                      editQuestion: () => wm.editQuestion(question),
+                    );
+                  },
                 );
-              }
-              final question = state[index];
-
-              return _QuestionWidget(
-                question: question,
-                deleteQuestion: () => wm.deleteQuestion(question),
-                editQuestion: () => wm.editQuestion(question),
-              );
-            },
-          );
-        },
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

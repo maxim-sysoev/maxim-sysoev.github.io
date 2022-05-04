@@ -57,6 +57,11 @@ class AdminWidgetModel extends WidgetModel<AdminScreen, AdminModel> implements I
       builder: (context) => const EditQuestionDialog(),
     );
   }
+
+  @override
+  void onBack() {
+    _navigator.pop();
+  }
 }
 
 abstract class IAdminWidgetModel extends IWidgetModel {
@@ -67,4 +72,6 @@ abstract class IAdminWidgetModel extends IWidgetModel {
   void editQuestion(Question question);
 
   void createNewQuestion();
+
+  void onBack();
 }

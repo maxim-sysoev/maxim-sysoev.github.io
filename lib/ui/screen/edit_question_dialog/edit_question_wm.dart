@@ -69,7 +69,7 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
     if (question != null) {
       questionController.text = question.text;
       _isHidden.accept(question.hide);
-      _canSkip.accept(!question.canSkip);
+      _canSkip.accept(question.canSkip);
 
       if (question is SelectionQuestion) {
         _questionType.accept(QuestionType.selection);
@@ -92,7 +92,11 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
 
   @override
   void togglePersonalData() {
-    _isPersonalData.accept(!(_isPersonalData.value ?? false));
+    final newValue = !(_isPersonalData.value ?? false);
+    _isPersonalData.accept(newValue);
+    if (newValue) {
+      _canSkip.accept(false);
+    }
   }
 
   @override
