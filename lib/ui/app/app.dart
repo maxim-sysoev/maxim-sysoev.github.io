@@ -24,6 +24,7 @@ class _AppState extends State<App> {
       color: Colors.transparent,
       builder: (_, widget) => Stack(
         children: [
+          const Positioned.fill(child: ColoredBox(color: Colors.white)),
           Positioned.fill(child: CustomPaint(painter: BackgroundPainter())),
           const MaterialApp(
             color: Colors.transparent,

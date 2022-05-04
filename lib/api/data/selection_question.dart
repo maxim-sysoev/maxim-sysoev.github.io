@@ -28,12 +28,13 @@ class SelectionQuestion extends Question<List<SelectionItem>> {
   final SelectionType selectionType;
 
   SelectionQuestion({
-    required String id,
     required String text,
     required this.questions,
     required this.selectionType,
+    String? id,
     bool? canSkip,
-  }) : super(id: id, text: text, canSkip: canSkip);
+    bool? hide,
+  }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
 }
 
 extension SelectionTypeX on SelectionType {

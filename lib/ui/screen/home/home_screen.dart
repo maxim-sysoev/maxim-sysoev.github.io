@@ -18,7 +18,10 @@ class HomeScreen extends ElementaryWidget<IHomeWidgetModel> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SurfLogo(width: 60),
+            GestureDetector(
+              onTap: wm.openAdminPanel,
+              child: const SurfLogo(width: 60),
+            ),
             const Spacer(),
             RichText(
               text: const TextSpan(

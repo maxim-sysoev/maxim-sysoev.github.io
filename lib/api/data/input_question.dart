@@ -6,10 +6,11 @@ class InputQuestion extends Question<String> {
   final bool isPersonalInfo;
 
   InputQuestion({
-    required String id,
     required String text,
     required this.hint,
     required this.isPersonalInfo,
+    String? id,
     bool? canSkip,
-  }) : super(id: id, text: text, canSkip: canSkip);
+    bool? hide,
+  }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
 }
