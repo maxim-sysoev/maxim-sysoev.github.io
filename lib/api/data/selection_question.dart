@@ -35,6 +35,9 @@ class SelectionQuestion extends Question<List<SelectionItem>> {
     bool? canSkip,
     bool? hide,
   }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
+
+  @override
+  TResult visit<TResult>(IQuestionVisitor<TResult> visitor) => visitor.selectionResponse(this);
 }
 
 extension SelectionTypeX on SelectionType {

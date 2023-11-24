@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:quiz/api/data/question.dart';
+import 'package:quiz/api/data/result/result.dart';
 import 'package:quiz/api/service/firebase/dto/question_dto/question_dto.dart';
+import 'package:quiz/api/service/firebase/dto/response_dto/result_dto.dart';
 
 const _kQuestions = 'questions';
 const _kResults = 'results';
@@ -35,8 +37,16 @@ class FirebaseService {
     await _questionsCollection.doc(question.id).update(QuestionDto.fromDomain(question).toJson());
   }
 
+  /// Получить список результатов
+  Stream<List<QuizResult>> listenResults() {
+    return _resultsCollection
+        .snapshots()
+        .map((event) => event.docs.map((e) => ResultDto.fromJson(e.data()).toDomain()).toList());
+  }
+
   /// сохранить результат квиза
-  Future<void> saveQuizResult(Map<String, Object?> data) => _resultsCollection.add(data);
+  Future<void> saveQuizResult(QuizResult result) =>
+      _resultsCollection.add(ResultDto.fromDomain(result).toJson());
 
   List<Question> _mapQuestionsList(QuerySnapshot<Map<String, dynamic>> value) {
     return value.docs

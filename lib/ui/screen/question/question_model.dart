@@ -2,13 +2,37 @@ import 'package:collection/collection.dart';
 import 'package:elementary/elementary.dart';
 import 'package:quiz/api/data/input_question.dart';
 import 'package:quiz/api/data/question.dart';
+import 'package:quiz/api/data/result/result.dart';
 import 'package:quiz/api/data/selection_question.dart';
 import 'package:quiz/api/service/firebase/firebase_service.dart';
 
-const _person = 'person';
-const _question = 'question';
-const _result = 'result';
-const _questions = 'questions';
+/// Визитор для создания ответов на вопросы
+class QuestionResponseVisitor implements IQuestionVisitor<Response?> {
+  @override
+  Response? inputResponse(InputQuestion question) {
+    final result = question.result;
+    if (result == null || result.isEmpty) return null;
+    return InputResponse(question: question.text, inputResult: result);
+  }
+
+  @override
+  Response? selectionResponse(SelectionQuestion question) {
+    final selectedItems = question.result
+        ?.map((e) => SelectedItem(
+              response: e.text,
+              isCorrect: e.isCorrect,
+            ))
+        .toList();
+    if (selectedItems == null || selectedItems.isEmpty) {
+      return null;
+    }
+
+    return SelectionResponse(
+      question: question.text,
+      selectedItems: selectedItems,
+    );
+  }
+}
 
 class QuestionModel extends ElementaryModel {
   final FirebaseService _firebaseService;
@@ -17,34 +41,21 @@ class QuestionModel extends ElementaryModel {
       : _firebaseService = firebaseService ?? FirebaseService();
 
   void saveResult(List<Question> questions) {
-    final result = <String, Object?>{};
     bool isPersonal(Question question) => question is InputQuestion && question.isPersonalInfo;
     final personInfo = questions.firstWhereOrNull(isPersonal);
-    if (personInfo != null) result[_person] = personInfo.result;
+    final questionVisitor = QuestionResponseVisitor();
     final questionsResult = questions
         .where((e) => !isPersonal(e))
-        .map(
-          (e) {
-            Object? result;
-            if (e is SelectionQuestion) {
-              result = e.result
-                  ?.map((e) => <String, Object>{_question: e.text, _result: e.isCorrect})
-                  .toList();
-            } else {
-              result = e.result;
-            }
-            if (result == null) return null;
-            return <String, Object?>{
-              _question: e.text,
-              _result: result,
-            };
-          },
-        )
-        .whereType<Object>()
+        .map((e) => e.visit(questionVisitor))
+        .whereType<Response>()
         .toList();
+
     if (questionsResult.isEmpty) return;
-    result[_questions] = questionsResult;
-    _firebaseService.saveQuizResult(result);
+
+    _firebaseService.saveQuizResult(QuizResult(
+      person: personInfo?.result as String,
+      responses: questionsResult,
+    ));
   }
 
   /// Проверяет все ли ответы верные

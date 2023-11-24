@@ -13,4 +13,7 @@ class InputQuestion extends Question<String> {
     bool? canSkip,
     bool? hide,
   }) : super(id: id, text: text, canSkip: canSkip, hide: hide);
+
+  @override
+  TResult visit<TResult>(IQuestionVisitor<TResult> visitor) => visitor.inputResponse(this);
 }
