@@ -1,9 +1,10 @@
 import 'package:intl/intl.dart';
 
 class StringRes {
-  static const String quizHeader1 = 'Хочешь ';
-  static const String quizHeader2 = 'начать';
-  static const String quizHeader3 = ' свой путь в IT?';
+  static const String quizHeader = 'Проверь, как ты ориентируешься в мире IT';
+
+  static const String quizDescriptionWhyTakeIt =
+      'чтобы узнать, сможешь ли работать в IT-компании. За прохождение квиза даём мерч и участие в розыгрыше';
 
   static const String startQuiz = 'Начать';
   static const String back = 'Назад';
@@ -30,9 +31,9 @@ class StringRes {
 
   static String quizDescription(int questionsCount) => Intl.plural(
         questionsCount,
-        one: 'Ответь на один вопрос, чтобы что-то узнать\u00A0:)',
-        few: 'Ответь на $questionsCount вопроса, чтобы что-то узнать\u00A0:)',
-        other: 'Ответь на $questionsCount вопросов, чтобы что-то узнать\u00A0:)',
+        one: 'Ответь на один вопрос, $quizDescriptionWhyTakeIt',
+        few: 'Ответь на $questionsCount вопроса, $quizDescriptionWhyTakeIt',
+        other: 'Ответь на $questionsCount вопросов, $quizDescriptionWhyTakeIt',
       );
 
   static String quizTotalState(int total) => ' из $total вопросов';

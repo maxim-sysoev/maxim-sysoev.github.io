@@ -6,7 +6,7 @@ import 'package:quiz/api/data/question.dart';
 import 'package:quiz/api/service/firebase/firebase_service.dart';
 
 /// Количество вопросов для квиза
-const questionsCount = 6;
+const questionsCount = 10;
 
 class HomeModel extends ElementaryModel {
   final FirebaseService _firebaseService;
