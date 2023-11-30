@@ -45,8 +45,7 @@ class HomeModel extends ElementaryModel {
       }
     }
 
-    final randomQuestions =
-        (otherQuestions..shuffle()).take(questionsCount - personalDataQuestions.length);
+    final randomQuestions = (otherQuestions..shuffle()).take(questionsCount);
 
     return [...randomQuestions, ...personalDataQuestions];
   }

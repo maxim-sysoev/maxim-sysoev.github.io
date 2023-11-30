@@ -46,7 +46,7 @@ class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
   QuestionWidgetModel({
     required List<Question> questions,
     required NavigatorState navigator,
-  })  : _totalPages = questions.length,
+  })  : _totalPages = (questions.length - 1).clamp(0, 100),
         _navigator = navigator,
         _questionsState = StateNotifier<List<Question>>(initValue: questions),
         super(QuestionModel());
@@ -56,13 +56,11 @@ class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
     final isStepPerformed = _changedNextPage();
     if (isStepPerformed) return;
     model.saveResult(_questionsState.value!);
-    final isAllCorrect = model.isAllAnswersCorrect(_questionsState.value!);
+    final numberCorrectAnswers = model.counterCorrectAnswers(_questionsState.value!);
     Future.delayed(
       const Duration(milliseconds: 50),
       () => _navigator.push(
-        ResultRoute(
-          isSuccess: isAllCorrect,
-        ),
+        ResultRoute(numberCorrectAnswers),
       ),
     );
   }

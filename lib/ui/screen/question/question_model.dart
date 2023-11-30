@@ -58,16 +58,17 @@ class QuestionModel extends ElementaryModel {
     ));
   }
 
-  /// Проверяет все ли ответы верные
+  /// Считает количество верных ответов
   ///
   /// Если у ответа нет правильного ответа (например, поле ввода), то он считается правильным
-  bool isAllAnswersCorrect(List<Question> questions) {
-    return questions.every((element) {
+  int counterCorrectAnswers(List<Question> questions) {
+    final answersCorrectList = questions.where((element) {
       if (element is SelectionQuestion) {
         return element.result?.every((element) => element.isCorrect) ?? false;
       }
 
       return true;
     });
+    return answersCorrectList.length;
   }
 }

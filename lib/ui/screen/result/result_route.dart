@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quiz/ui/screen/result/result_screen.dart';
 
 class ResultRoute extends MaterialPageRoute<void> {
-  ResultRoute({
-    required bool isSuccess,
-  }) : super(
-          builder: (_) => ResultScreen(
-            isSuccess: isSuccess,
-          ),
+  ResultRoute(int numberCorrectAnswers)
+      : super(
+          builder: (_) => ResultScreen(numberCorrectAnswers),
         );
 
   @override
