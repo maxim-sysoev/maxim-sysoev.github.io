@@ -60,14 +60,14 @@ class QuestionModel extends ElementaryModel {
 
   /// Считает количество верных ответов
   ///
-  /// Если у ответа нет правильного ответа (например, поле ввода), то он считается правильным
+  /// Если у ответа нет правильного ответа (например, поле ввода), то он считается НЕправильным
   int counterCorrectAnswers(List<Question> questions) {
     final answersCorrectList = questions.where((element) {
       if (element is SelectionQuestion) {
         return element.result?.every((element) => element.isCorrect) ?? false;
       }
 
-      return true;
+      return false;
     });
     return answersCorrectList.length;
   }
