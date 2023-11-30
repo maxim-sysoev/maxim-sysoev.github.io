@@ -23,15 +23,9 @@ class HomeScreen extends ElementaryWidget<IHomeWidgetModel> {
               child: const SurfLogo(width: 60),
             ),
             const Spacer(),
-            RichText(
-              text: const TextSpan(
-                style: FontsRes.h1Black,
-                children: [
-                  TextSpan(text: StringRes.quizHeader1),
-                  TextSpan(text: StringRes.quizHeader2, style: FontsRes.h1BlueItalic),
-                  TextSpan(text: StringRes.quizHeader3),
-                ],
-              ),
+            const Text(
+              StringRes.quizHeader,
+              style: FontsRes.h1Black,
             ),
             const SizedBox(height: 24),
             Text(
