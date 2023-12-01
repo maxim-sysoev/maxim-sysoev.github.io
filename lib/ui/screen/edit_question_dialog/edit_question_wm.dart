@@ -93,11 +93,11 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
       if (question is InputQuestion) {
         _questionType.accept(QuestionType.input);
         _isPersonalData.accept(question.isPersonalInfo);
-        firstNameController.text = question.firstName;
-        lastNameController.text = question.lastName;
-        emailController.text = question.email;
-        phoneOrTelegramController.text = question.phoneOrTelegram;
-        workOrStudyController.text = question.workOrStudy;
+        firstNameController.text = question.inputFirstName;
+        lastNameController.text = question.inputLastName;
+        emailController.text = question.inputEmail;
+        phoneOrTelegramController.text = question.inputPhoneOrTelegram;
+        workOrStudyController.text = question.inputWorkOrStudy;
       }
     }
   }

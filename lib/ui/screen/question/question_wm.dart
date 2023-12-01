@@ -88,6 +88,31 @@ class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
   }
 
   @override
+  void onFirstnameUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].firstName = result;
+  }
+
+  @override
+  void onLastNameUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].lastName = result;
+  }
+
+  @override
+  void onEmailUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].email = result;
+  }
+
+  @override
+  void onPhoneOrTelegramUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].phoneOrTelegram = result;
+  }
+
+  @override
+  void onWorkOrStudyUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].workOrStudy = result;
+  }
+
+  @override
   void onScreen() {
     FocusManager.instance.primaryFocus?.unfocus();
   }
@@ -113,6 +138,16 @@ abstract class IQuestionWidgetModel extends IWidgetModel {
   int get totalPages;
 
   void onResultUpdated(Object? result);
+
+  void onFirstnameUpdated(String? result);
+
+  void onLastNameUpdated(String? result);
+
+  void onEmailUpdated(String? result);
+
+  void onPhoneOrTelegramUpdated(String? result);
+
+  void onWorkOrStudyUpdated(String? result);
 
   void nextQuestion();
 

@@ -35,7 +35,7 @@ Map<String, dynamic> _$QuestionDtoToJson(QuestionDto instance) {
   }
 
   writeNotNull('email', instance.email);
-  val['type'] = _$QuestionTypeEnumMap[instance.type]!;
+  val['type'] = _$QuestionTypeEnumMap[instance.type];
   writeNotNull('questions', instance.answers?.map((e) => e.toJson()).toList());
   val['can_skip'] = instance.canSkip;
   val['hide'] = instance.hide;

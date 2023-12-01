@@ -97,11 +97,11 @@ class QuestionDto {
       case QuestionType.input:
         return InputQuestion(
           id: id,
-          firstName: firstName!,
-          lastName: lastName!,
-          email: email!,
-          phoneOrTelegram: phoneOrTelegram!,
-          workOrStudy: workOrStudy!,
+          inputFirstName: firstName!,
+          inputLastName: lastName!,
+          inputEmail: email!,
+          inputPhoneOrTelegram: phoneOrTelegram!,
+          inputWorkOrStudy: workOrStudy!,
           isPersonalInfo: isPersonal ?? false,
           text: text,
           hide: hide,

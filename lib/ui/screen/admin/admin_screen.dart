@@ -201,7 +201,7 @@ class _QuizResultWidget extends StatelessWidget {
         children: [
           const Text('Персональные данные: '),
           const SizedBox(width: 8),
-          Expanded(child: Text(result.person ?? 'unknown user')),
+          Expanded(child: Text(result.lastName ?? 'unknown user')),
         ],
       ),
     );

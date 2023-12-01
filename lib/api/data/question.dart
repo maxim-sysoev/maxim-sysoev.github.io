@@ -7,11 +7,21 @@ abstract class Question<T> {
   final bool canSkip;
   final bool hide;
   T? result;
+  String? firstName;
+  String? lastName;
+  String? email;
+  String? phoneOrTelegram;
+  String? workOrStudy;
 
   Question({
     required this.id,
     required this.text,
     this.result,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phoneOrTelegram,
+    this.workOrStudy,
     bool? canSkip,
     bool? hide,
   })  : canSkip = canSkip ?? false,
@@ -22,5 +32,6 @@ abstract class Question<T> {
 
 abstract class IQuestionVisitor<T> {
   T inputResponse(InputQuestion question);
+
   T selectionResponse(SelectionQuestion question);
 }

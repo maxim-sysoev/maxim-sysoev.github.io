@@ -20,7 +20,7 @@ class CsvResponseVisitor implements IResponseVisitor<_ColumnData> {
 
   @override
   _ColumnData inputResponse(InputResponse response) {
-    return _ColumnData(response.question, response.inputResult);
+    return _ColumnData(response.question, response.inputLastName);
   }
 
   @override
@@ -53,7 +53,7 @@ class CsvDataExportService extends DataExportService {
     final visitor = CsvResponseVisitor(questions);
     final responses = results.map((e) {
       final array = [
-        _ColumnData(e.person ?? 'unknown', ''),
+        _ColumnData(e.lastName ?? 'unknown', ''),
         ...e.responses.map((e) => e.visit(visitor)),
       ];
       return '${array.map((e) => e.info).join(';')}\n'

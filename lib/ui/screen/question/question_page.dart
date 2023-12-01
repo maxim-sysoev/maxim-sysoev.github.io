@@ -13,12 +13,22 @@ class QuestionPage extends StatefulWidget {
   final VoidCallback onNextPressed;
   final VoidCallback onSkipPressed;
   final ValueChanged<Object?> onResultUpdated;
+  final ValueChanged<String?> onFirstnameUpdated;
+  final ValueChanged<String?> onLastNameUpdated;
+  final ValueChanged<String?> onEmailUpdated;
+  final ValueChanged<String?> onPhoneOrTelegramUpdated;
+  final ValueChanged<String?> onWorkOrStudyUpdated;
 
   const QuestionPage({
     required this.question,
     required this.onNextPressed,
     required this.onSkipPressed,
     required this.onResultUpdated,
+    required this.onFirstnameUpdated,
+    required this.onLastNameUpdated,
+    required this.onEmailUpdated,
+    required this.onPhoneOrTelegramUpdated,
+    required this.onWorkOrStudyUpdated,
     Key? key,
   }) : super(key: key);
 
@@ -58,46 +68,46 @@ class _QuestionPageState extends State<QuestionPage> {
         if (question is InputQuestion) ...[
           _InputQuestionSection(
             inputQuestionResult: question.result,
-            inputQuestionHint: question.firstName,
+            inputQuestionHint: question.inputFirstName,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onFirstnameUpdated(str);
               handleUpdate(str);
             },
           ),
           const SizedBox(height: 16),
           _InputQuestionSection(
             inputQuestionResult: question.result,
-            inputQuestionHint: question.lastName,
+            inputQuestionHint: question.inputLastName,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onLastNameUpdated(str);
               handleUpdate(str);
             },
           ),
           const SizedBox(height: 16),
           _InputQuestionSection(
             inputQuestionResult: question.result,
-            inputQuestionHint: question.email,
+            inputQuestionHint: question.inputEmail,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onEmailUpdated(str);
               handleUpdate(str);
             },
           ),
           const SizedBox(height: 16),
           _InputQuestionSection(
             inputQuestionResult: question.result,
-            inputQuestionHint: question.phoneOrTelegram,
+            inputQuestionHint: question.inputPhoneOrTelegram,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onPhoneOrTelegramUpdated(str);
               handleUpdate(str);
             },
           ),
           const SizedBox(height: 16),
           _InputQuestionSection(
             inputQuestionResult: question.result,
-            inputQuestionHint: question.workOrStudy,
+            inputQuestionHint: question.inputWorkOrStudy,
             isWorkOrStudyField: true,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onWorkOrStudyUpdated(str);
               handleUpdate(str);
             },
           ),
