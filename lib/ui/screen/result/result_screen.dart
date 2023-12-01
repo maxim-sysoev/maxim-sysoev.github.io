@@ -1,12 +1,12 @@
 import 'package:elementary/elementary.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/assets/assets.dart';
 import 'package:quiz/ui/screen/result/result_wm.dart';
 import 'package:quiz/ui/widgets/custom_screen.dart';
-import 'package:quiz/ui/widgets/primary_button.dart';
 import 'package:quiz/ui/widgets/surf_logo.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ElementaryWidget<IResultWidgetModel> {
   final int countCorrectAnswers;
 
   const ResultScreen(
@@ -24,27 +24,13 @@ class ResultScreen extends StatelessWidget {
           children: [
             const SurfLogo(width: 60),
             const Spacer(),
-            // TODO(NKom-17): create other variations of the results
-            if (numberCorrectAnswers < 4)
+            if (countCorrectAnswers < 4)
               _ResultDescriptionBlock(
                 header: StringRes.failureResultHeader,
-            // TODO(NKom-17): create other variations of the results
-            if (countCorrectAnswers > 1)
-              const _ResultDescriptionBlock(
-                header1: StringRes.successResultHeader1,
-                header2: StringRes.successResultHeader2,
-                header3: StringRes.successResultHeader3,
-                description: StringRes.successResultDescription,
-              )
-            else
-              const _ResultDescriptionBlock(
-                header1: StringRes.failureResultHeader1,
-                header2: StringRes.failureResultHeader2,
-                header3: StringRes.failureResultHeader3,
                 description: StringRes.failureResultDescription,
                 goToTelegram: wm.goToTelegram,
               )
-            else if (numberCorrectAnswers < 7)
+            else if (countCorrectAnswers < 7)
               _ResultDescriptionBlock(
                 header: StringRes.middleResultHeader,
                 description: StringRes.middleResultDescription,
@@ -56,11 +42,6 @@ class ResultScreen extends StatelessWidget {
                 description: StringRes.successResultDescription,
                 goToTelegram: wm.goToTelegram,
               ),
-            const SizedBox(height: 32),
-            PrimaryButton(
-              text: StringRes.resultAction,
-              onPressed: wm.repeat,
-            ),
             const Spacer(),
           ],
         ),
@@ -88,26 +69,19 @@ class _ResultDescriptionBlock extends StatelessWidget {
       children: [
         Text(header, style: FontsRes.h1Black),
         const SizedBox(height: 24),
-        Text(description, style: FontsRes.text1Black),
-        Row(
-          children: [
-            TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: ColorRes.transparent,
-                splashFactory: NoSplash.splashFactory,
-                padding: EdgeInsets.zero,
+        RichText(
+          text: TextSpan(
+            style: FontsRes.text1Black,
+            children: [
+              TextSpan(text: description),
+              TextSpan(
+                text: StringRes.subscribeToTelegram1,
+                style: FontsRes.text1Blue,
+                recognizer: TapGestureRecognizer()..onTap = goToTelegram,
               ),
-              onPressed: goToTelegram,
-              child: Text(
-                StringRes.subscribeToTelegram1,
-                style: FontsRes.text1Black.copyWith(
-                  decoration: TextDecoration.underline,
-                  color: ColorRes.blue,
-                ),
-              ),
-            ),
-            const Text(StringRes.subscribeToTelegram2, style: FontsRes.text1Black),
-          ],
+              const TextSpan(text: StringRes.subscribeToTelegram2),
+            ],
+          ),
         ),
       ],
     );

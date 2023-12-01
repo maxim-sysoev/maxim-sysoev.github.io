@@ -21,13 +21,13 @@ class StringRes {
 
   static const String successResultHeader = 'Ты круто разбираешься в IT!';
   static const String successResultDescription =
-      'Будем ждать тебя на мероприятиях и рады видеть среди Сёрферов.\n';
+      'Будем ждать тебя на мероприятиях и рады видеть среди Сёрферов. ';
   static const String middleResultHeader = 'Ты неплохо разбираешься в IT-командах!';
   static const String middleResultDescription =
-      'На мероприятиях рассказываем о стажировках и вакансиях подробнее, ждём тебя ещё.\n';
+      'На мероприятиях рассказываем о стажировках и вакансиях подробнее, ждём тебя ещё. ';
   static const String failureResultHeader = 'Ты только начинаешь познавать мир IT, но всё впереди!';
   static const String failureResultDescription =
-      'Приходи пообщаться с Surf — мы всё расскажем и покажем.\n';
+      'Приходи пообщаться с Surf — мы всё расскажем и покажем. ';
   static const String resultAction = 'Повторить';
 
   const StringRes._();
