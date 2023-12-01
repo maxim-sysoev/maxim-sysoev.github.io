@@ -34,7 +34,15 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
   @override
   final questionController = TextEditingController();
   @override
-  final hintController = TextEditingController();
+  final firstNameController = TextEditingController();
+  @override
+  final lastNameController = TextEditingController();
+  @override
+  final emailController = TextEditingController();
+  @override
+  final phoneOrTelegramController = TextEditingController();
+  @override
+  final workOrStudyController = TextEditingController();
 
   final NavigatorState _navigator;
 
@@ -85,7 +93,11 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
       if (question is InputQuestion) {
         _questionType.accept(QuestionType.input);
         _isPersonalData.accept(question.isPersonalInfo);
-        hintController.text = question.hint;
+        firstNameController.text = question.firstName;
+        lastNameController.text = question.lastName;
+        emailController.text = question.email;
+        phoneOrTelegramController.text = question.phoneOrTelegram;
+        workOrStudyController.text = question.workOrStudy;
       }
     }
   }
@@ -132,7 +144,11 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
 
     final question = QuestionInfo(
       question: questionController.text,
-      hint: hintController.text,
+      firstName: firstNameController.text,
+      lastName: lastNameController.text,
+      email: emailController.text,
+      phoneOrTelegram: phoneOrTelegramController.text,
+      workOrStudy: workOrStudyController.text,
       questionType: type,
       canSkip: canSkip.value ?? true,
       isHidden: isHidden.value ?? false,
@@ -162,7 +178,31 @@ class EditQuestionWidgetModel extends WidgetModel<EditQuestionDialog, EditQuesti
   }
 
   @override
-  String? validateHint(String? value) {
+  String? validateFirstName(String? value) {
+    if (value?.isEmpty ?? true) return 'Обязательное поле';
+    return null;
+  }
+
+  @override
+  String? validateLastName(String? value) {
+    if (value?.isEmpty ?? true) return 'Обязательное поле';
+    return null;
+  }
+
+  @override
+  String? validateEmail(String? value) {
+    if (value?.isEmpty ?? true) return 'Обязательное поле';
+    return null;
+  }
+
+  @override
+  String? validatePhoneOrTelegram(String? value) {
+    if (value?.isEmpty ?? true) return 'Обязательное поле';
+    return null;
+  }
+
+  @override
+  String? validateWorkOrStudy(String? value) {
     if (value?.isEmpty ?? true) return 'Обязательное поле';
     return null;
   }
@@ -186,16 +226,34 @@ abstract class IEditQuestionWidgetModel extends IWidgetModel {
   // ------ Input question fields -----------
   ListenableState<bool> get isPersonalData;
 
-  TextEditingController get hintController;
+  TextEditingController get firstNameController;
+
+  TextEditingController get lastNameController;
+
+  TextEditingController get emailController;
+
+  TextEditingController get phoneOrTelegramController;
+
+  TextEditingController get workOrStudyController;
+
   // ----------------------------------------
 
   // ------ Selectable question fields ------
   ListenableState<List<Answer>> get answersList;
+
   // ----------------------------------------
 
   String? validateQuestion(String? value);
 
-  String? validateHint(String? value);
+  String? validateFirstName(String? value);
+
+  String? validateLastName(String? value);
+
+  String? validateEmail(String? value);
+
+  String? validatePhoneOrTelegram(String? value);
+
+  String? validateWorkOrStudy(String? value);
 
   void changeQuestionType(QuestionType? type);
 

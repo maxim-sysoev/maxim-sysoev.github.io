@@ -7,7 +7,11 @@ import 'package:quiz/ui/screen/edit_question_dialog/edit_question_wm.dart';
 
 class QuestionInfo {
   final String question;
-  final String hint;
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String phoneOrTelegram;
+  final String workOrStudy;
   final QuestionType questionType;
   final bool canSkip;
   final bool isHidden;
@@ -16,7 +20,11 @@ class QuestionInfo {
 
   const QuestionInfo({
     required this.question,
-    required this.hint,
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+    required this.phoneOrTelegram,
+    required this.workOrStudy,
     required this.questionType,
     required this.canSkip,
     required this.isHidden,
@@ -58,7 +66,11 @@ class EditQuestionModel extends ElementaryModel {
 
     switch (info.questionType) {
       case QuestionType.input:
-        if (info.hint.isEmpty) return false;
+        if (info.firstName.isEmpty ||
+            info.lastName.isEmpty ||
+            info.email.isEmpty ||
+            info.phoneOrTelegram.isEmpty ||
+            info.workOrStudy.isEmpty) return false;
         return true;
 
       case QuestionType.selection:
@@ -75,7 +87,11 @@ class EditQuestionModel extends ElementaryModel {
         return InputQuestion(
           id: id,
           text: info.question,
-          hint: info.hint,
+          firstName: info.firstName,
+          lastName: info.lastName,
+          email: info.email,
+          phoneOrTelegram: info.phoneOrTelegram,
+          workOrStudy: info.workOrStudy,
           isPersonalInfo: info.isPersonalData,
           canSkip: info.canSkip,
           hide: info.isHidden,

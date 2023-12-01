@@ -55,14 +55,53 @@ class _QuestionPageState extends State<QuestionPage> {
               handleUpdate(items);
             },
           ),
-        if (question is InputQuestion)
+        if (question is InputQuestion) ...[
           _InputQuestionSection(
-            inputQuestion: question,
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.firstName,
             onInputUpdated: (str) {
               widget.onResultUpdated(str);
               handleUpdate(str);
             },
           ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.lastName,
+            onInputUpdated: (str) {
+              widget.onResultUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.email,
+            onInputUpdated: (str) {
+              widget.onResultUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.phoneOrTelegram,
+            onInputUpdated: (str) {
+              widget.onResultUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.workOrStudy,
+            isWorkOrStudyField: true,
+            onInputUpdated: (str) {
+              widget.onResultUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+        ],
         const SizedBox(height: 32),
         AnimatedCrossFade(
           firstChild: PrimaryButton(text: StringRes.nextQuestion, onPressed: widget.onNextPressed),
@@ -103,12 +142,16 @@ class _QuestionPageState extends State<QuestionPage> {
 }
 
 class _InputQuestionSection extends StatelessWidget {
-  final InputQuestion inputQuestion;
+  final String? inputQuestionResult;
+  final String? inputQuestionHint;
+  final bool isWorkOrStudyField;
   final ValueChanged<String?> onInputUpdated;
 
   const _InputQuestionSection({
-    required this.inputQuestion,
+    required this.inputQuestionResult,
+    required this.inputQuestionHint,
     required this.onInputUpdated,
+    this.isWorkOrStudyField = false,
     Key? key,
   }) : super(key: key);
 
@@ -117,14 +160,14 @@ class _InputQuestionSection extends StatelessWidget {
     return TextFormField(
       onChanged: (str) => onInputUpdated(str.isEmpty ? null : str),
       style: FontsRes.text1Black,
-      initialValue: inputQuestion.result,
+      initialValue: inputQuestionResult,
       cursorColor: ColorRes.black,
       cursorWidth: 1,
-      maxLines: 3,
+      maxLines: isWorkOrStudyField ? 3 : 1,
+      textInputAction: isWorkOrStudyField ? TextInputAction.done : TextInputAction.next,
       decoration: InputDecoration(
-        hintText: inputQuestion.hint,
+        hintText: inputQuestionHint,
         hintStyle: FontsRes.text1Black32,
-        hintMaxLines: 3,
         border: const UnderlineInputBorder(borderSide: BorderSide(color: ColorRes.black32)),
         focusedBorder: const UnderlineInputBorder(),
       ),
