@@ -1,20 +1,21 @@
+import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz/assets/assets.dart';
-import 'package:quiz/ui/screen/home/home_route.dart';
+import 'package:quiz/ui/screen/result/result_wm.dart';
 import 'package:quiz/ui/widgets/custom_screen.dart';
 import 'package:quiz/ui/widgets/primary_button.dart';
 import 'package:quiz/ui/widgets/surf_logo.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ElementaryWidget<IResultWidgetModel> {
   final int numberCorrectAnswers;
 
   const ResultScreen(
     this.numberCorrectAnswers, {
     Key? key,
-  }) : super(key: key);
+  }) : super(createResultWidgetModel, key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(IResultWidgetModel wm) {
     return CustomScreen(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -24,27 +25,28 @@ class ResultScreen extends StatelessWidget {
             const SurfLogo(width: 60),
             const Spacer(),
             // TODO(NKom-17): create other variations of the results
-            if (numberCorrectAnswers > 1)
-              const _ResultDescriptionBlock(
-                header1: StringRes.successResultHeader1,
-                header2: StringRes.successResultHeader2,
-                header3: StringRes.successResultHeader3,
-                description: StringRes.successResultDescription,
+            if (numberCorrectAnswers < 4)
+              _ResultDescriptionBlock(
+                header: StringRes.failureResultHeader,
+                description: StringRes.failureResultDescription,
+                goToTelegram: wm.goToTelegram,
+              )
+            else if (numberCorrectAnswers < 7)
+              _ResultDescriptionBlock(
+                header: StringRes.middleResultHeader,
+                description: StringRes.middleResultDescription,
+                goToTelegram: wm.goToTelegram,
               )
             else
-              const _ResultDescriptionBlock(
-                header1: StringRes.failureResultHeader1,
-                header2: StringRes.failureResultHeader2,
-                header3: StringRes.failureResultHeader3,
-                description: StringRes.failureResultDescription,
+              _ResultDescriptionBlock(
+                header: StringRes.successResultHeader,
+                description: StringRes.successResultDescription,
+                goToTelegram: wm.goToTelegram,
               ),
             const SizedBox(height: 32),
             PrimaryButton(
               text: StringRes.resultAction,
-              onPressed: () => Navigator.of(context).pushAndRemoveUntil(
-                HomeRoute(),
-                (r) => r.isFirst,
-              ),
+              onPressed: wm.repeat,
             ),
             const Spacer(),
           ],
@@ -55,16 +57,14 @@ class ResultScreen extends StatelessWidget {
 }
 
 class _ResultDescriptionBlock extends StatelessWidget {
-  final String header1;
-  final String header2;
-  final String header3;
+  final String header;
   final String description;
+  final VoidCallback goToTelegram;
 
   const _ResultDescriptionBlock({
-    required this.header1,
-    required this.header2,
-    required this.header3,
+    required this.header,
     required this.description,
+    required this.goToTelegram,
     Key? key,
   }) : super(key: key);
 
@@ -73,18 +73,29 @@ class _ResultDescriptionBlock extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RichText(
-          text: TextSpan(
-            style: FontsRes.h1Black,
-            children: [
-              TextSpan(text: header1),
-              TextSpan(text: header2, style: FontsRes.h1BlueItalic),
-              TextSpan(text: header3),
-            ],
-          ),
-        ),
+        Text(header, style: FontsRes.h1Black),
         const SizedBox(height: 24),
         Text(description, style: FontsRes.text1Black),
+        Row(
+          children: [
+            TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: ColorRes.transparent,
+                splashFactory: NoSplash.splashFactory,
+                padding: EdgeInsets.zero,
+              ),
+              onPressed: goToTelegram,
+              child: Text(
+                StringRes.subscribeToTelegram1,
+                style: FontsRes.text1Black.copyWith(
+                  decoration: TextDecoration.underline,
+                  color: ColorRes.blue,
+                ),
+              ),
+            ),
+            const Text(StringRes.subscribeToTelegram2, style: FontsRes.text1Black),
+          ],
+        ),
       ],
     );
   }

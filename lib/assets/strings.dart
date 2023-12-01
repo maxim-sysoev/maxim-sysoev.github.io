@@ -15,16 +15,19 @@ class StringRes {
   static const String nextQuestion = 'Далее';
   static const String skipQuestion = 'или пропустить вопрос';
 
-  static const String successResultHeader1 = 'Поздравляем!\nТы ';
-  static const String successResultHeader2 = 'настоящий';
-  static const String successResultHeader3 = ' молодец!';
+  static const String subscribeToTelegram1 = 'Подписывайся на наш Telegram-канал';
+  static const String subscribeToTelegram2 =
+      ', чтобы не пропускать новости об IT и поучаствовать в розыгрыше.';
+
+  static const String successResultHeader = 'Ты круто разбираешься в IT!';
   static const String successResultDescription =
-      'Ведь ты ответил правильно на все вопросы и заслужил печать.\nПопроси у HR билет на Live Coding и беги пробовать лимонад.';
-  static const String failureResultHeader1 = 'Интересно ';
-  static const String failureResultHeader2 = 'узнать';
-  static const String failureResultHeader3 = ' больше о работе в IT?';
+      'Будем ждать тебя на мероприятиях и рады видеть среди Сёрферов.\n';
+  static const String middleResultHeader = 'Ты неплохо разбираешься в IT-командах!';
+  static const String middleResultDescription =
+      'На мероприятиях рассказываем о стажировках и вакансиях подробнее, ждём тебя ещё.\n';
+  static const String failureResultHeader = 'Ты только начинаешь познавать мир IT, но всё впереди!';
   static const String failureResultDescription =
-      'Приходи на нашу летнюю школу и выбери свое направление.\nА теперь получи печать у HR и беги пробовать вкусный лимонад.';
+      'Приходи пообщаться с Surf — мы всё расскажем и покажем.\n';
   static const String resultAction = 'Повторить';
 
   const StringRes._();
