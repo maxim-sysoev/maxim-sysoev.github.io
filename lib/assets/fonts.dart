@@ -116,5 +116,14 @@ class FontsRes {
     color: ColorRes.black32,
   );
 
+  static const TextStyle text1Blue = TextStyle(
+    fontFamily: _steinbeck,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    letterSpacing: -.2,
+    color: ColorRes.blue,
+    decoration: TextDecoration.underline,
+  );
+
   const FontsRes._();
 }
