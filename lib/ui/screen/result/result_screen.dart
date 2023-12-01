@@ -6,11 +6,11 @@ import 'package:quiz/ui/widgets/custom_screen.dart';
 import 'package:quiz/ui/widgets/primary_button.dart';
 import 'package:quiz/ui/widgets/surf_logo.dart';
 
-class ResultScreen extends ElementaryWidget<IResultWidgetModel> {
-  final int numberCorrectAnswers;
+class ResultScreen extends StatelessWidget {
+  final int countCorrectAnswers;
 
   const ResultScreen(
-    this.numberCorrectAnswers, {
+    this.countCorrectAnswers, {
     Key? key,
   }) : super(createResultWidgetModel, key: key);
 
@@ -28,6 +28,19 @@ class ResultScreen extends ElementaryWidget<IResultWidgetModel> {
             if (numberCorrectAnswers < 4)
               _ResultDescriptionBlock(
                 header: StringRes.failureResultHeader,
+            // TODO(NKom-17): create other variations of the results
+            if (countCorrectAnswers > 1)
+              const _ResultDescriptionBlock(
+                header1: StringRes.successResultHeader1,
+                header2: StringRes.successResultHeader2,
+                header3: StringRes.successResultHeader3,
+                description: StringRes.successResultDescription,
+              )
+            else
+              const _ResultDescriptionBlock(
+                header1: StringRes.failureResultHeader1,
+                header2: StringRes.failureResultHeader2,
+                header3: StringRes.failureResultHeader3,
                 description: StringRes.failureResultDescription,
                 goToTelegram: wm.goToTelegram,
               )

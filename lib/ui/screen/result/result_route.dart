@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:quiz/ui/screen/result/result_screen.dart';
 
 class ResultRoute extends MaterialPageRoute<void> {
-  ResultRoute(int numberCorrectAnswers)
+  ResultRoute(int countCorrectAnswers)
       : super(
-          builder: (_) => ResultScreen(numberCorrectAnswers),
+          builder: (_) => ResultScreen(countCorrectAnswers),
         );
 
   @override
