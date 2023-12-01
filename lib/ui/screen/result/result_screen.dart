@@ -6,10 +6,10 @@ import 'package:quiz/ui/widgets/primary_button.dart';
 import 'package:quiz/ui/widgets/surf_logo.dart';
 
 class ResultScreen extends StatelessWidget {
-  final bool isSuccess;
+  final int countCorrectAnswers;
 
-  const ResultScreen({
-    required this.isSuccess,
+  const ResultScreen(
+    this.countCorrectAnswers, {
     Key? key,
   }) : super(key: key);
 
@@ -23,7 +23,8 @@ class ResultScreen extends StatelessWidget {
           children: [
             const SurfLogo(width: 60),
             const Spacer(),
-            if (isSuccess)
+            // TODO(NKom-17): create other variations of the results
+            if (countCorrectAnswers > 1)
               const _ResultDescriptionBlock(
                 header1: StringRes.successResultHeader1,
                 header2: StringRes.successResultHeader2,

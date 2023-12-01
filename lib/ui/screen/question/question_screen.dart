@@ -114,18 +114,21 @@ class _PageStateState extends State<_PageState> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        AnimatedFadeOutIn<String>(
-          builder: (str) => Text(str, style: FontsRes.text1Black40),
-          data: _currPage,
-          duration: kThemeChangeDuration,
-        ),
-        Text(
-          StringRes.quizTotalState(widget.totalPages),
-          style: FontsRes.text1Black40,
-        ),
-      ],
+    return Visibility(
+      visible: widget.currentPage <= widget.totalPages,
+      child: Row(
+        children: [
+          AnimatedFadeOutIn<String>(
+            builder: (str) => Text(str, style: FontsRes.text1Black40),
+            data: _currPage,
+            duration: kThemeChangeDuration,
+          ),
+          Text(
+            StringRes.quizTotalState(widget.totalPages),
+            style: FontsRes.text1Black40,
+          ),
+        ],
+      ),
     );
   }
 }
