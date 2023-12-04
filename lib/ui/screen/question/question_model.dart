@@ -58,27 +58,23 @@ class QuestionResponseVisitor implements IQuestionVisitor<Response?> {
 class QuestionModel extends ElementaryModel {
   final FirebaseService _firebaseService;
 
-  QuestionModel({FirebaseService? firebaseService})
-      : _firebaseService = firebaseService ?? FirebaseService();
+  QuestionModel({FirebaseService? firebaseService}) : _firebaseService = firebaseService ?? FirebaseService();
 
   void saveResult(List<Question> questions) {
     bool isPersonal(Question question) => question is InputQuestion && question.isPersonalInfo;
     final personInfo = questions.firstWhereOrNull(isPersonal);
     final questionVisitor = QuestionResponseVisitor();
-    final questionsResult = questions
-        .where((e) => !isPersonal(e))
-        .map((e) => e.visit(questionVisitor))
-        .whereType<Response>()
-        .toList();
+    final questionsResult =
+        questions.where((e) => !isPersonal(e)).map((e) => e.visit(questionVisitor)).whereType<Response>().toList();
 
     if (questionsResult.isEmpty) return;
 
     _firebaseService.saveQuizResult(QuizResult(
       firstName: personInfo?.firstName as String,
       lastName: personInfo?.lastName as String,
-      email: personInfo?.email as String,
-      phoneOrTelegram: personInfo?.phoneOrTelegram as String,
-      workOrStudy: personInfo?.workOrStudy as String,
+      email: personInfo?.email,
+      phoneOrTelegram: personInfo?.phoneOrTelegram,
+      workOrStudy: personInfo?.workOrStudy,
       responses: questionsResult,
     ));
   }
