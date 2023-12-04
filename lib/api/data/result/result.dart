@@ -1,14 +1,22 @@
 /// Результат прохождения квиза
 class QuizResult {
   /// Данные об игроке
-  final String? person;
+  final String? firstName;
+  final String? lastName;
+  final String? email;
+  final String? phoneOrTelegram;
+  final String? workOrStudy;
 
   /// Ответы игрока
   final List<Response> responses;
 
   QuizResult({
     required this.responses,
-    this.person,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phoneOrTelegram,
+    this.workOrStudy,
   });
 }
 
@@ -26,12 +34,20 @@ abstract class Response {
 
 /// Ответ на вопрос с типом поля ввода
 class InputResponse extends Response {
-  /// Введённая пользователем строка
-  final String inputResult;
+  /// Введённые пользователем строки
+  final String inputFirstName;
+  final String inputLastName;
+  final String inputEmail;
+  final String inputPhoneOrTelegram;
+  final String inputWorkOrStudy;
 
   InputResponse({
     required String question,
-    required this.inputResult,
+    required this.inputFirstName,
+    required this.inputLastName,
+    required this.inputEmail,
+    required this.inputPhoneOrTelegram,
+    required this.inputWorkOrStudy,
   }) : super(question: question);
 
   @override

@@ -10,9 +10,30 @@ import 'package:quiz/api/service/firebase/firebase_service.dart';
 class QuestionResponseVisitor implements IQuestionVisitor<Response?> {
   @override
   Response? inputResponse(InputQuestion question) {
-    final result = question.result;
-    if (result == null || result.isEmpty) return null;
-    return InputResponse(question: question.text, inputResult: result);
+    final firstName = question.firstName;
+    final lastName = question.lastName;
+    final email = question.email;
+    final phoneOrTelegram = question.phoneOrTelegram;
+    final workOrStudy = question.workOrStudy;
+    if (firstName == null ||
+        firstName.isEmpty ||
+        lastName == null ||
+        lastName.isEmpty ||
+        email == null ||
+        email.isEmpty ||
+        phoneOrTelegram == null ||
+        phoneOrTelegram.isEmpty ||
+        workOrStudy == null ||
+        workOrStudy.isEmpty) return null;
+
+    return InputResponse(
+      question: question.text,
+      inputFirstName: firstName,
+      inputLastName: lastName,
+      inputEmail: email,
+      inputPhoneOrTelegram: phoneOrTelegram,
+      inputWorkOrStudy: workOrStudy,
+    );
   }
 
   @override
@@ -37,23 +58,23 @@ class QuestionResponseVisitor implements IQuestionVisitor<Response?> {
 class QuestionModel extends ElementaryModel {
   final FirebaseService _firebaseService;
 
-  QuestionModel({FirebaseService? firebaseService})
-      : _firebaseService = firebaseService ?? FirebaseService();
+  QuestionModel({FirebaseService? firebaseService}) : _firebaseService = firebaseService ?? FirebaseService();
 
   void saveResult(List<Question> questions) {
     bool isPersonal(Question question) => question is InputQuestion && question.isPersonalInfo;
     final personInfo = questions.firstWhereOrNull(isPersonal);
     final questionVisitor = QuestionResponseVisitor();
-    final questionsResult = questions
-        .where((e) => !isPersonal(e))
-        .map((e) => e.visit(questionVisitor))
-        .whereType<Response>()
-        .toList();
+    final questionsResult =
+        questions.where((e) => !isPersonal(e)).map((e) => e.visit(questionVisitor)).whereType<Response>().toList();
 
     if (questionsResult.isEmpty) return;
 
     _firebaseService.saveQuizResult(QuizResult(
-      person: personInfo?.result as String,
+      firstName: personInfo?.firstName as String,
+      lastName: personInfo?.lastName as String,
+      email: personInfo?.email,
+      phoneOrTelegram: personInfo?.phoneOrTelegram,
+      workOrStudy: personInfo?.workOrStudy,
       responses: questionsResult,
     ));
   }

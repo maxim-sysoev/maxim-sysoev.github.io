@@ -13,12 +13,22 @@ class QuestionPage extends StatefulWidget {
   final VoidCallback onNextPressed;
   final VoidCallback onSkipPressed;
   final ValueChanged<Object?> onResultUpdated;
+  final ValueChanged<String?> onFirstnameUpdated;
+  final ValueChanged<String?> onLastNameUpdated;
+  final ValueChanged<String?> onEmailUpdated;
+  final ValueChanged<String?> onPhoneOrTelegramUpdated;
+  final ValueChanged<String?> onWorkOrStudyUpdated;
 
   const QuestionPage({
     required this.question,
     required this.onNextPressed,
     required this.onSkipPressed,
     required this.onResultUpdated,
+    required this.onFirstnameUpdated,
+    required this.onLastNameUpdated,
+    required this.onEmailUpdated,
+    required this.onPhoneOrTelegramUpdated,
+    required this.onWorkOrStudyUpdated,
     Key? key,
   }) : super(key: key);
 
@@ -55,14 +65,53 @@ class _QuestionPageState extends State<QuestionPage> {
               handleUpdate(items);
             },
           ),
-        if (question is InputQuestion)
+        if (question is InputQuestion) ...[
           _InputQuestionSection(
-            inputQuestion: question,
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.inputFirstName,
             onInputUpdated: (str) {
-              widget.onResultUpdated(str);
+              widget.onFirstnameUpdated(str);
               handleUpdate(str);
             },
           ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.inputLastName,
+            onInputUpdated: (str) {
+              widget.onLastNameUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.inputEmail,
+            onInputUpdated: (str) {
+              widget.onEmailUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.inputPhoneOrTelegram,
+            onInputUpdated: (str) {
+              widget.onPhoneOrTelegramUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+          const SizedBox(height: 16),
+          _InputQuestionSection(
+            inputQuestionResult: question.result,
+            inputQuestionHint: question.inputWorkOrStudy,
+            isWorkOrStudyField: true,
+            onInputUpdated: (str) {
+              widget.onWorkOrStudyUpdated(str);
+              handleUpdate(str);
+            },
+          ),
+        ],
         const SizedBox(height: 32),
         AnimatedCrossFade(
           firstChild: PrimaryButton(text: StringRes.nextQuestion, onPressed: widget.onNextPressed),
@@ -103,12 +152,16 @@ class _QuestionPageState extends State<QuestionPage> {
 }
 
 class _InputQuestionSection extends StatelessWidget {
-  final InputQuestion inputQuestion;
+  final String? inputQuestionResult;
+  final String? inputQuestionHint;
+  final bool isWorkOrStudyField;
   final ValueChanged<String?> onInputUpdated;
 
   const _InputQuestionSection({
-    required this.inputQuestion,
+    required this.inputQuestionResult,
+    required this.inputQuestionHint,
     required this.onInputUpdated,
+    this.isWorkOrStudyField = false,
     Key? key,
   }) : super(key: key);
 
@@ -117,14 +170,14 @@ class _InputQuestionSection extends StatelessWidget {
     return TextFormField(
       onChanged: (str) => onInputUpdated(str.isEmpty ? null : str),
       style: FontsRes.text1Black,
-      initialValue: inputQuestion.result,
+      initialValue: inputQuestionResult,
       cursorColor: ColorRes.black,
       cursorWidth: 1,
-      maxLines: 3,
+      maxLines: isWorkOrStudyField ? 3 : 1,
+      textInputAction: isWorkOrStudyField ? TextInputAction.done : TextInputAction.next,
       decoration: InputDecoration(
-        hintText: inputQuestion.hint,
+        hintText: inputQuestionHint,
         hintStyle: FontsRes.text1Black32,
-        hintMaxLines: 3,
         border: const UnderlineInputBorder(borderSide: BorderSide(color: ColorRes.black32)),
         focusedBorder: const UnderlineInputBorder(),
       ),

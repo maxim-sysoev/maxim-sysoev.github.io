@@ -152,11 +152,39 @@ class _InputQuestionFields extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         TextFormField(
-          controller: wm.hintController,
+          controller: wm.firstNameController,
           decoration: const InputDecoration(
-            label: Text('Хинт'),
+            label: Text('Имя'),
           ),
-          validator: wm.validateHint,
+          validator: wm.validateFirstName,
+        ),
+        TextFormField(
+          controller: wm.lastNameController,
+          decoration: const InputDecoration(
+            label: Text('Фамилия'),
+          ),
+          validator: wm.validateLastName,
+        ),
+        TextFormField(
+          controller: wm.emailController,
+          decoration: const InputDecoration(
+            label: Text('Электронная почта'),
+          ),
+          validator: wm.validateEmail,
+        ),
+        TextFormField(
+          controller: wm.phoneOrTelegramController,
+          decoration: const InputDecoration(
+            label: Text('Номер телефона или Telegram'),
+          ),
+          validator: wm.validatePhoneOrTelegram,
+        ),
+        TextFormField(
+          controller: wm.workOrStudyController,
+          decoration: const InputDecoration(
+            label: Text('Место работы/учёбы (вуз, факультет, курс)'),
+          ),
+          validator: wm.validateWorkOrStudy,
         ),
         _CheckBoxField(
           state: wm.isPersonalData,

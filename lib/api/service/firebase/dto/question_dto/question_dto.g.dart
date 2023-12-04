@@ -13,7 +13,11 @@ QuestionDto _$QuestionDtoFromJson(Map<String, dynamic> json) => QuestionDto(
       canSkip: json['can_skip'] as bool? ?? true,
       hide: json['hide'] as bool? ?? false,
       isPersonal: json['is_personal'] as bool?,
-      hint: json['hint'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      email: json['email'] as String?,
+      phoneOrTelegram: json['phone_or_telegram'] as String?,
+      workOrStudy: json['work_or_study'] as String?,
       answers: (json['questions'] as List<dynamic>?)
           ?.map((e) => SelectionItemDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -30,12 +34,16 @@ Map<String, dynamic> _$QuestionDtoToJson(QuestionDto instance) {
     }
   }
 
-  writeNotNull('hint', instance.hint);
+  writeNotNull('email', instance.email);
   val['type'] = _$QuestionTypeEnumMap[instance.type];
   writeNotNull('questions', instance.answers?.map((e) => e.toJson()).toList());
   val['can_skip'] = instance.canSkip;
   val['hide'] = instance.hide;
   writeNotNull('is_personal', instance.isPersonal);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('phone_or_telegram', instance.phoneOrTelegram);
+  writeNotNull('work_or_study', instance.workOrStudy);
   return val;
 }
 

@@ -15,7 +15,7 @@ enum QuestionType {
 @JsonSerializable()
 class QuestionDto {
   final String text;
-  final String? hint;
+  final String? email;
 
   @JsonKey(defaultValue: QuestionType.unknown)
   final QuestionType type;
@@ -32,13 +32,29 @@ class QuestionDto {
   @JsonKey(name: 'is_personal')
   final bool? isPersonal;
 
+  @JsonKey(name: 'first_name')
+  final String? firstName;
+
+  @JsonKey(name: 'last_name')
+  final String? lastName;
+
+  @JsonKey(name: 'phone_or_telegram')
+  final String? phoneOrTelegram;
+
+  @JsonKey(name: 'work_or_study')
+  final String? workOrStudy;
+
   const QuestionDto({
     required this.type,
     required this.text,
     required this.canSkip,
     required this.hide,
     this.isPersonal,
-    this.hint,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.phoneOrTelegram,
+    this.workOrStudy,
     this.answers,
   });
 
@@ -52,7 +68,11 @@ class QuestionDto {
         canSkip: question.canSkip,
         hide: question.hide,
         isPersonal: question.isPersonalInfo,
-        hint: question.hint,
+        firstName: question.firstName,
+        lastName: question.lastName,
+        email: question.email,
+        phoneOrTelegram: question.phoneOrTelegram,
+        workOrStudy: question.workOrStudy,
       );
     } else if (question is SelectionQuestion) {
       return QuestionDto(
@@ -77,7 +97,11 @@ class QuestionDto {
       case QuestionType.input:
         return InputQuestion(
           id: id,
-          hint: hint!,
+          inputFirstName: firstName!,
+          inputLastName: lastName!,
+          inputEmail: email!,
+          inputPhoneOrTelegram: phoneOrTelegram!,
+          inputWorkOrStudy: workOrStudy!,
           isPersonalInfo: isPersonal ?? false,
           text: text,
           hide: hide,

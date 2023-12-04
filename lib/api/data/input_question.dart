@@ -1,13 +1,21 @@
 import 'package:quiz/api/data/question.dart';
 
-/// вопрос с полем ввода
+/// вопрос с полями ввода (сбор контактов)
 class InputQuestion extends Question<String> {
-  final String hint;
+  final String inputFirstName;
+  final String inputLastName;
+  final String inputEmail;
+  final String inputPhoneOrTelegram;
+  final String inputWorkOrStudy;
   final bool isPersonalInfo;
 
   InputQuestion({
     required String text,
-    required this.hint,
+    required this.inputFirstName,
+    required this.inputLastName,
+    required this.inputEmail,
+    required this.inputPhoneOrTelegram,
+    required this.inputWorkOrStudy,
     required this.isPersonalInfo,
     String? id,
     bool? canSkip,

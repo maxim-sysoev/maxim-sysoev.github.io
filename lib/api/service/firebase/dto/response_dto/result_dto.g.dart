@@ -10,7 +10,11 @@ ResultDto _$ResultDtoFromJson(Map<String, dynamic> json) => ResultDto(
       questionResponses: (json['questions'] as List<dynamic>)
           .map((e) => ResponseDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      person: json['person'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      email: json['email'] as String?,
+      phoneOrTelegram: json['phone_or_telegram'] as String?,
+      workOrStudy: json['work_or_study'] as String?,
     );
 
 Map<String, dynamic> _$ResultDtoToJson(ResultDto instance) {
@@ -22,7 +26,11 @@ Map<String, dynamic> _$ResultDtoToJson(ResultDto instance) {
     }
   }
 
-  writeNotNull('person', instance.person);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone_or_telegram', instance.phoneOrTelegram);
+  writeNotNull('work_or_study', instance.workOrStudy);
   val['questions'] = instance.questionResponses.map((e) => e.toJson()).toList();
   return val;
 }
@@ -32,7 +40,11 @@ ResponseDto _$ResponseDtoFromJson(Map<String, dynamic> json) => ResponseDto(
       response: (json['result'] as List<dynamic>?)
           ?.map((e) => SelectedResponseDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      inputResponse: json['inputResult'] as String?,
+      firstName: json['first_name'] as String?,
+      lastName: json['last_name'] as String?,
+      email: json['email'] as String?,
+      phoneOrTelegram: json['phone_or_telegram'] as String?,
+      workOrStudy: json['work_or_study'] as String?,
     );
 
 Map<String, dynamic> _$ResponseDtoToJson(ResponseDto instance) {
@@ -46,7 +58,11 @@ Map<String, dynamic> _$ResponseDtoToJson(ResponseDto instance) {
     }
   }
 
-  writeNotNull('inputResult', instance.inputResponse);
+  writeNotNull('first_name', instance.firstName);
+  writeNotNull('last_name', instance.lastName);
+  writeNotNull('email', instance.email);
+  writeNotNull('phone_or_telegram', instance.phoneOrTelegram);
+  writeNotNull('work_or_study', instance.workOrStudy);
   writeNotNull('result', instance.response?.map((e) => e.toJson()).toList());
   return val;
 }

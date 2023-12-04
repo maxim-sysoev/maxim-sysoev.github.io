@@ -4,6 +4,7 @@ import 'package:quiz/api/data/question.dart';
 import 'package:quiz/ui/screen/question/question_model.dart';
 import 'package:quiz/ui/screen/question/question_screen.dart';
 import 'package:quiz/ui/screen/result/result_route.dart';
+import 'package:quiz/ui/util/scope_functions_extenstion.dart';
 
 const _kChangePageDuration = Duration(milliseconds: 400);
 const _kChangePageCurve = Curves.easeInOutQuad;
@@ -20,8 +21,7 @@ QuestionWidgetModel createQuestionWidgetModel({
   );
 }
 
-class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
-    implements IQuestionWidgetModel {
+class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel> implements IQuestionWidgetModel {
   late final NavigatorState _navigator;
   late final StateNotifier<int> _pageState = StateNotifier<int>(initValue: 1);
 
@@ -88,6 +88,31 @@ class QuestionWidgetModel extends WidgetModel<QuestionScreen, QuestionModel>
   }
 
   @override
+  void onFirstnameUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].firstName = result?.let((it) => it.isEmpty ? null : it);
+  }
+
+  @override
+  void onLastNameUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].lastName = result?.let((it) => it.isEmpty ? null : it);
+  }
+
+  @override
+  void onEmailUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].email = result?.let((it) => it.isEmpty ? null : it);
+  }
+
+  @override
+  void onPhoneOrTelegramUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].phoneOrTelegram = result?.let((it) => it.isEmpty ? null : it);
+  }
+
+  @override
+  void onWorkOrStudyUpdated(String? result) {
+    _questionsState.value![_pageController.page!.toInt()].workOrStudy = result?.let((it) => it.isEmpty ? null : it);
+  }
+
+  @override
   void onScreen() {
     FocusManager.instance.primaryFocus?.unfocus();
   }
@@ -113,6 +138,16 @@ abstract class IQuestionWidgetModel extends IWidgetModel {
   int get totalPages;
 
   void onResultUpdated(Object? result);
+
+  void onFirstnameUpdated(String? result);
+
+  void onLastNameUpdated(String? result);
+
+  void onEmailUpdated(String? result);
+
+  void onPhoneOrTelegramUpdated(String? result);
+
+  void onWorkOrStudyUpdated(String? result);
 
   void nextQuestion();
 
