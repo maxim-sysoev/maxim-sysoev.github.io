@@ -9,7 +9,7 @@ import 'package:quiz/ui/widgets/custom_screen.dart';
 import 'package:quiz/ui/widgets/secondary_button.dart';
 
 class QuestionScreen extends ElementaryWidget<IQuestionWidgetModel> {
-  QuestionScreen(Iterable<Question> questions, {Key? key})
+  QuestionScreen(List<Question> questions, {Key? key})
       : super(
           (ctx) => createQuestionWidgetModel(questions: questions, context: ctx),
           key: key,

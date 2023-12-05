@@ -10,13 +10,11 @@ const _kChangePageDuration = Duration(milliseconds: 400);
 const _kChangePageCurve = Curves.easeInOutQuad;
 
 QuestionWidgetModel createQuestionWidgetModel({
-  required Iterable<Question> questions,
+  required List<Question> questions,
   required BuildContext context,
 }) {
-  final questionsList = questions.toList()..shuffle();
-  final lastQuestions = questionsList.where((e) => !e.canSkip);
   return QuestionWidgetModel(
-    questions: [...questionsList.where((e) => e.canSkip), ...lastQuestions],
+    questions: questions,
     navigator: Navigator.of(context),
   );
 }
